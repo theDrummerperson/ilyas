@@ -1,21 +1,257 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  height: 100%; /* Ensures full height for flexbox */
+  display: flex; /* Enables flexbox for layout */
+  flex-direction: column; /* Stacks content vertically */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Main Content */
+main {
+  flex: 1; /* Pushes the footer to the bottom of the page */
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #090909; /* Dark background for contrast */
+  color: #fff; /* White text color */
+  padding: 1rem 0; /* Space inside the footer */
+  text-align: center; /* Center-aligns content */
+  font-size: 0.9rem; /* Slightly smaller font size for footer */
+  position: relative; /* Normal positioning */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center; /* Centers the content */
+  align-items: center; /* Vertically centers the content */
+  gap: 10px; /* Adds space between the text and the icon */
+}
+
+.footer-text {
+  margin: 0; /* Removes default margins */
+}
+
+.footer-icon {
+  color: #f70808; /* Instagram icon color */
+  font-size: 1.2rem; /* Slightly larger icon size */
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.footer-icon:hover {
+  color: #FF2400; /* Change to red on hover */
+}
+
+
+/* Background */
+.page-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/spashhero.svg') no-repeat center center/cover;
+  z-index: -1; /* Behind all content */
+}
+
+/* Main Content */
+.main-content {
+  padding: 20px;
+}
+
+/* Navigation Bar */
+.navbar {
+  position: fixed; 
+  top: 0; 
+  left: 50; 
+  width: 80%;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 10px 20px; 
+  background-color: #ffffff;
+  z-index: 1000; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Brand Logo */
+.brand {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ed1616;
+  margin-right: 5px; 
+  padding-left: 10px; 
+}
+
+/* Navigation Links */
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.nav-links li {
+  margin: 0 10px; 
+}
+
+.nav-links li a {
+  text-decoration: none;
+  font-size: 1rem;
+  color: rgb(9, 9, 9);
+  padding: 8px 12px;
+  transition: all 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #E91E63; 
+  border-bottom: 2px solid #E91E63;
+}
+
+/* Contact Button */
+.contact-button {
+  background-color: #000; 
+  color: #fff; 
+  border: none;
+  padding: 10px 19px; 
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 5px; 
+}
+
+.contact-button:hover {
+  background-color: #FF2400;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none; 
+  font-size: 2.5rem; 
+  background: none;
+  border: none;
+  color: #090909;
+  cursor: pointer;
+}
+
+/* Quote Section */
+.quote-container {
+  position: absolute; /* Absolute positioning to center it */
+  top: 50%; /* Start at 50% of the viewport height */
+  left: 50%; /* Start at 50% of the viewport width */
+  transform: translate(-50%, -50%); /* Center the container based on its dimensions */
+  z-index: 1; /* Ensure it is above the background but below the navbar */
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  padding: 5rem;
+  border-radius: 12px;
+  max-width: 600px;
+  margin: auto;
+  color: rgb(0, 0, 0);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  overflow: hidden; /* Ensures pseudo-element stays inside the container */
+}
+
+.quote-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('/spashhero.svg') no-repeat center center / cover;
+  z-index: -1; /* Places it behind the text */
+  opacity: 0.5; /* Reduces the image opacity by 50% */
+}
+.quote {
+  font-size: clamp(1rem, 2vw, 2rem);
+  font-style: normal;
+  line-height: 1.4; 
+  margin-bottom: 1rem;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+  padding: 0.5rem 1rem; /* Adds space around the text */
+  border-radius: 8px; /* Rounds the corners of the background */
+  display: inline-block; /* Ensures the background only covers the text */
+}
+
+.quote-author {
+  text-align: right;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+  font-size: 1rem;
+  color: rgba(234, 9, 9, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; 
+    flex-direction: column;
+    position: absolute;
+    top: 60px; 
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+
+  .nav-links li {
+    margin: 5px 0;
+  }
+
+  .nav-links li a {
+    font-size: 1.2rem;
+    padding: 10px 0;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+    margin-left: auto;
+  }
+
+  .contact-button {
+    display: none;
+  }
+
+  .quote-container {
+    padding: 1.5rem;
+  }
+
+  .quote {
+    font-size: 1.2rem;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@media (min-width: 769px) {
+  .nav-links {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    background: none;
+    box-shadow: none;
+  }
+
+  .hamburger {
+    display: none;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
