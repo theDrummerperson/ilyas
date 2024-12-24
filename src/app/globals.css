@@ -1,47 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* Your custom styles after Tailwind imports */
 html, body {
   margin: 0;
-  padding: 0;
+  padding: 25;
+  height: 100%;
   font-family: 'Montserrat', sans-serif;
-  height: 100%; /* Ensures full height for flexbox */
-  display: flex; /* Enables flexbox for layout */
-  flex-direction: column; /* Stacks content vertically */
 }
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Rest of your custom styles */
 
 /* Main Content */
 main {
   flex: 1; /* Pushes the footer to the bottom of the page */
-}
-
-/* Footer Styles */
-.footer {
-  background-color: #090909; /* Dark background for contrast */
-  color: #fff; /* White text color */
-  padding: 1rem 0; /* Space inside the footer */
-  text-align: center; /* Center-aligns content */
-  font-size: 0.9rem; /* Slightly smaller font size for footer */
-  position: relative; /* Normal positioning */
-}
-
-.footer-content {
-  display: flex;
-  justify-content: center; /* Centers the content */
-  align-items: center; /* Vertically centers the content */
-  gap: 10px; /* Adds space between the text and the icon */
-}
-
-.footer-text {
-  margin: 0; /* Removes default margins */
-}
-
-.footer-icon {
-  color: #f70808; /* Instagram icon color */
-  font-size: 1.2rem; /* Slightly larger icon size */
-  transition: color 0.3s ease; /* Smooth hover effect */
-}
-
-.footer-icon:hover {
-  color: #FF2400; /* Change to red on hover */
 }
 
 
@@ -61,20 +40,6 @@ main {
   padding: 20px;
 }
 
-/* Navigation Bar */
-.navbar {
-  position: fixed; 
-  top: 0; 
-  left: 50; 
-  width: 80%;
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  padding: 10px 20px; 
-  background-color: #ffffff;
-  z-index: 1000; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
 
 /* Brand Logo */
 .brand {
@@ -83,33 +48,6 @@ main {
   color: #ed1616;
   margin-right: 5px; 
   padding-left: 10px; 
-}
-
-/* Navigation Links */
-.nav-links {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  justify-content: center;
-  flex-grow: 1;
-}
-
-.nav-links li {
-  margin: 0 10px; 
-}
-
-.nav-links li a {
-  text-decoration: none;
-  font-size: 1rem;
-  color: rgb(9, 9, 9);
-  padding: 8px 12px;
-  transition: all 0.3s ease;
-}
-
-.nav-links li a:hover {
-  color: #E91E63; 
-  border-bottom: 2px solid #E91E63;
 }
 
 /* Contact Button */
@@ -129,15 +67,6 @@ main {
   background-color: #FF2400;
 }
 
-/* Hamburger Menu */
-.hamburger {
-  display: none; 
-  font-size: 2.5rem; 
-  background: none;
-  border: none;
-  color: #090909;
-  cursor: pointer;
-}
 
 /* Quote Section */
 .quote-container {
@@ -185,6 +114,37 @@ main {
   font-size: 1rem;
   color: rgba(234, 9, 9, 0.8);
 }
+/* Footer Styles */
+.footer {
+  background-color: #090909; /* Dark background for contrast */
+  color: #fff; /* White text color */
+  padding: 1rem 0; /* Space inside the footer */
+  text-align: center; /* Center-aligns content */
+  font-size: 0.9rem; /* Slightly smaller font size for footer */
+  position: relative; /* Normal positioning */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center; /* Centers the content */
+  align-items: center; /* Vertically centers the content */
+  gap: 10px; /* Adds space between the text and the icon */
+}
+
+.footer-text {
+  margin: 0; /* Removes default margins */
+}
+
+.footer-icon {
+  color: #f70808; /* Instagram icon color */
+  font-size: 1.2rem; /* Slightly larger icon size */
+  transition: color 0.3s ease; /* Smooth hover effect */
+}
+
+.footer-icon:hover {
+  color: #FF2400; /* Change to red on hover */
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -199,59 +159,4 @@ main {
     padding: 10px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
-  }
-
-  .nav-links li {
-    margin: 5px 0;
-  }
-
-  .nav-links li a {
-    font-size: 1.2rem;
-    padding: 10px 0;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .hamburger {
-    display: block;
-    margin-left: auto;
-  }
-
-  .contact-button {
-    display: none;
-  }
-
-  .quote-container {
-    padding: 1.5rem;
-  }
-
-  .quote {
-    font-size: 1.2rem;
-  }
-}
-
-@media (min-width: 769px) {
-  .nav-links {
-    display: flex;
-    position: static;
-    flex-direction: row;
-    background: none;
-    box-shadow: none;
-  }
-
-  .hamburger {
-    display: none;
-  }
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+  }}
