@@ -2,28 +2,30 @@
 
 import React from 'react';
 import type { ReactNode } from 'react';
+import './globals.css'; // Import global styles
 import NavBar from '../NavBar';
+import Footer from '../Footer'; // Modular footer component
 
 type MainLayoutProps = {
   children: ReactNode;
-}
+};
 
 const MainLayout = ({ children }: MainLayoutProps) => {
-  return React.createElement('div', { className: "page-container" },
-    React.createElement(NavBar, {}),
-    React.createElement('main', { className: "content" }, children),
-    React.createElement('footer', { className: "footer" },
-      React.createElement('div', { className: "footer-content" },
-        React.createElement('p', { className: "footer-text" }, '© 2024 a.Ilyas Abukar. All rights reserved.'),
-        React.createElement('a', {
-          href: "https://www.instagram.com/smartugly_",
-          target: "_blank",
-          rel: "noopener noreferrer",
-          className: "footer-icon",
-          'aria-label': "Follow on Instagram"
-        }, React.createElement('i', { className: "fab fa-instagram" }))
-      )
-    )
+  return (
+    <>
+      {/* Add Font Awesome for icons */}
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      />
+
+      {/* Page structure */}
+      <div className="page-container">
+        <NavBar />
+        <main className="content">{children}</main>
+        <Footer />
+      </div>
+    </>
   );
 };
 
