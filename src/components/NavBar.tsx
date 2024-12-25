@@ -33,12 +33,11 @@ const NavBar = () => {
   }, []);
 
   const navLinks = [
-    { href: '/', label: 'HOME' },
-    { href: '/shop', label: 'SHOP' },
+    { href: '/about', label: 'ABOUT' },
+    { href: '/blog', label: 'UPDATES' },
     { href: '/portfolio', label: 'PORTFOLIO' },
     { href: '/resume', label: 'RESUME' },
     { href: '/contact', label: 'CONTACT' },
-    { href: '/login', label: 'LOG IN' }
   ];
 
   return (
