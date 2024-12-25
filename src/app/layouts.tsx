@@ -27,7 +27,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               <p className="footer-text">
                 © 2024 a.Ilyas Abukar. All rights reserved.
               </p>
-              
+              <a
                 href="https://www.instagram.com/smartugly_"
                 target="_blank"
                 rel="noopener noreferrer"
