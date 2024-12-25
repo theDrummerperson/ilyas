@@ -173,3 +173,18 @@ main {
 .space-y-1.5 span {
   transition: all 0.3s ease-in-out;
 }
+
+/* Add to your globals.css */
+.group:hover .group-hover\:opacity-100 {
+  opacity: 1;
+}
+
+.group:hover .group-hover\:scale-100 {
+  transform: scale(1);
+}
+
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
