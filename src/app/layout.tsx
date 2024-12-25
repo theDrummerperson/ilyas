@@ -1,6 +1,7 @@
 import './globals.css';
 import { ReactNode } from 'react';
 import { metadata } from './metadata';
+import { viewport } from './viewport';
 import MainLayout from '@/components/layouts/MainLayout';
 import Script from 'next/script';
 
@@ -8,7 +9,7 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
-export { metadata };
+export { metadata, viewport };
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (

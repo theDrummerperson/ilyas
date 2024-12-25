@@ -3,6 +3,13 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { X, ChevronDown } from 'lucide-react';
 
+interface NavLink {
+  href?: string;
+  label: string;
+  isDropdown?: boolean;
+  subLinks?: { href: string; label: string; }[];
+}
+
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -31,7 +38,7 @@ const NavBar = () => {
     };
   }, []);
 
-  const navLinks = [
+  const navLinks: NavLink[] = [
     { href: '/about', label: 'ABOUT' },
     { href: '/blog', label: 'UPDATES' },
     { 
@@ -51,9 +58,9 @@ const NavBar = () => {
       <nav className="fixed top-0 left-0 w-full bg-black text-white shadow-md z-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex justify-between items-center h-16">
-            {/* Brand/Logo as Link */}
+            {/* Brand/Logo */}
             <Link 
-              href="http://www.ilyasabukar.com" 
+              href="http://www.ilyasabukar.com"
               className="text-2xl font-bold text-red-600 hover:text-red-500 transition-colors duration-200"
             >
               a.Ilyas Abukar
@@ -88,7 +95,7 @@ const NavBar = () => {
                 ) : (
                   <Link 
                     key={link.href}
-                    href={link.href}
+                    href={link.href!}
                     className="text-white hover:text-red-600 transition-colors duration-200"
                   >
                     {link.label}
@@ -151,7 +158,7 @@ const NavBar = () => {
                 ) : (
                   <Link
                     key={link.href}
-                    href={link.href}
+                    href={link.href!}
                     className="text-white text-2xl font-light tracking-wider hover:text-red-500 transition-colors duration-200"
                     onClick={toggleMenu}
                   >
