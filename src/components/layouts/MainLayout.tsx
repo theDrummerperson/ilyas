@@ -1,14 +1,9 @@
 'use client';
 
-import React from 'react';
-import type { ReactNode } from 'react';
-import NavBar from '../NavBar';
+import React, { PropsWithChildren } from 'react';
+import NavBar from '@/components/NavBar';
 
-type MainLayoutProps = {
-  children: ReactNode;
-}
-
-const MainLayout = ({ children }: MainLayoutProps) => {
+const MainLayout = ({ children }: PropsWithChildren) => {
   return (
     <div className="page-container">
       <NavBar />

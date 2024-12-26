@@ -1,27 +1,18 @@
 import './globals.css';
-import { ReactNode } from 'react';
-import { metadata } from './metadata';
-import { viewport } from './viewport';
+import type { Metadata } from 'next';
+import { PropsWithChildren } from 'react';
 import MainLayout from '@/components/layouts/MainLayout';
-import Script from 'next/script';
 
-interface RootLayoutProps {
-  children: ReactNode;
-}
+export const metadata: Metadata = {
+  title: 'a.Ilyas Abukar',
+  description: 'Portfolio website of a.Ilyas Abukar',
+};
 
-export { metadata, viewport };
-
-export default function RootLayout({ children }: RootLayoutProps) {
+export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true}>
-        <Script 
-          src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"
-          strategy="afterInteractive"
-        />
-        <MainLayout>
-          {children}
-        </MainLayout>
+      <body>
+        <MainLayout>{children}</MainLayout>
       </body>
     </html>
   );
