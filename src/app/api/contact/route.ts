@@ -1,11 +1,19 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-// Create reusable transporter object using SMTP
+// Add debug logging for environment variables (don't log the actual password!)
+console.log('Email Config:', {
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
+  user: process.env.SMTP_USER,
+  hasPassword: !!process.env.SMTP_PASSWORD,
+  contactEmail: process.env.CONTACT_EMAIL
+});
+
 const transporter = nodemailer.createTransport({
   host: process.env.SMTP_HOST,
   port: Number(process.env.SMTP_PORT),
-  secure: false, // true for 465, false for other ports
+  secure: false,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASSWORD,
@@ -14,39 +22,49 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: Request) {
   try {
-    const { name, email, message } = await request.json();
+    const formData = await request.json();
+    console.log('Received form data:', formData);
 
-    // Validate form data
-    if (!name || !email || !message) {
+    if (!formData.name || !formData.email || !formData.message) {
+      console.log('Missing required fields:', formData);
       return NextResponse.json(
         { message: 'Missing required fields' },
         { status: 400 }
       );
     }
 
-    // Send email
-    await transporter.sendMail({
+    console.log('Attempting to send email...');
+    
+    const mailOptions = {
       from: `"Contact Form" <${process.env.SMTP_USER}>`,
       to: process.env.CONTACT_EMAIL,
-      subject: `New Contact Form Message from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      subject: `New Contact Form Message from ${formData.name}`,
+      text: `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Name:</strong> ${formData.name}</p>
+        <p><strong>Email:</strong> ${formData.email}</p>
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <p>${formData.message.replace(/\n/g, '<br>')}</p>
       `,
-    });
+    };
+
+    console.log('Mail options prepared:', { ...mailOptions, text: '[truncated]' });
+
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully:', info);
 
     return NextResponse.json(
       { message: 'Email sent successfully' },
       { status: 200 }
     );
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Detailed error:', error);
     return NextResponse.json(
-      { message: 'Failed to send email' },
+      { 
+        message: 'Failed to send email',
+        error: error instanceof Error ? error.message : 'Unknown error'
+      },
       { status: 500 }
     );
   }
