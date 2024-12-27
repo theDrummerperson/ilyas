@@ -1,76 +1,156 @@
-
 'use client';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-import React from 'react';
-import { motion } from 'framer-motion';
+interface Quote {
+  text: string;
+  author: string;
+}
 
-export default function Page() {
+export default function Home() {
+  const quotes: Quote[] = [
+    {
+      text: "Love itself, the subversive gift, is an important public good, and loving is a significant political act.",
+      author: "- Richard Iton",
+    },
+    {
+      text: "...respect black noise—the shrieks, the moans, the nonsense, and the opacity, which are always in excess of legibility and of the law.",
+      author: "- Saidiya Hartman",
+    },
+    {
+      text: "I'm like Carrie Bradshaw with a back brace on.",
+      author: "- Doechii",
+    },
+  ];
+
+  const [[currentQuoteIndex, direction], setCurrentQuote] = useState([0, 0]);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  // Auto-rotation
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    
+    const intervalId = setInterval(() => {
+      setCurrentQuote(prev => [(prev[0] + 1) % quotes.length, 1]);
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+  }, [quotes.length, isAutoPlaying]);
+
+  const paginate = (newDirection: number) => {
+    setIsAutoPlaying(false);
+    setCurrentQuote(prev => {
+      const nextIndex = prev[0] + newDirection;
+      if (nextIndex < 0) return [quotes.length - 1, newDirection];
+      if (nextIndex >= quotes.length) return [0, newDirection];
+      return [nextIndex, newDirection];
+    });
+  };
+
+  const swipeConfidenceThreshold = 10000;
+  const swipePower = (offset: number, velocity: number) => {
+    return Math.abs(offset) * velocity;
+  };
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      id="about"
-      className="relative bg-white dark:bg-gray-900 overflow-hidden mt-16"
+    <div 
+      className="min-h-screen relative overflow-hidden"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.90)), url("/azores.jpeg")`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}
     >
-      <div className="max-w-7xl mx-auto">
-        <div className="relative z-10 pb-8 bg-white dark:bg-gray-900 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-          <svg 
-            className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white dark:text-gray-900 transform translate-x-1/2"
-            fill="currentColor" 
-            viewBox="0 0 100 100" 
-            preserveAspectRatio="none" 
-            aria-hidden="true"
+      <div className="h-screen flex items-center justify-center px-4">
+        <AnimatePresence initial={false} custom={direction} mode="wait">
+          <motion.div
+            key={currentQuoteIndex}
+            custom={direction}
+            variants={{
+              enter: (direction: number) => ({
+                x: direction > 0 ? 1000 : -1000,
+                opacity: 0
+              }),
+              center: {
+                zIndex: 1,
+                x: 0,
+                opacity: 1
+              },
+              exit: (direction: number) => ({
+                zIndex: 0,
+                x: direction < 0 ? 1000 : -1000,
+                opacity: 0
+              })
+            }}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 }
+            }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={1}
+            onDragEnd={(e, { offset, velocity }) => {
+              const swipe = swipePower(offset.x, velocity.x);
+
+              if (swipe < -swipeConfidenceThreshold) {
+                paginate(1);
+              } else if (swipe > swipeConfidenceThreshold) {
+                paginate(-1);
+              }
+            }}
+            className="absolute w-full px-4"
           >
-            <polygon points="50,0 100,0 50,100 0,100" />
-          </svg>
-
-          <div className="pt-1" />
-
-          <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-            <div className="sm:text-center lg:text-left">
-              <motion.h2 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
-                className="my-6 text-2xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-3xl md:text-4xl"
-              >
-                About Me
-              </motion.h2>
-
-              <motion.div
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 max-w-lg mx-auto">
+              <motion.p 
+                className="text-xl sm:text-2xl text-white mb-6 leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="mt-3 text-base text-gray-700 dark:text-gray-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto lg:mx-0"
+                transition={{ delay: 0.2 }}
               >
-              <p className="mb-4">
-    I write and create experiences that explore the relationships between art, technology, and identity. Much of my time is spent examining Western ways of seeing the body and the built environment in modern society. As a visual artist, I'm particularly interested in how humans use visual narratives—distinct from oral and written forms—to explore our perceptual blind spots and challenge the common assumption that seeing equals understanding.
-  </p>
-  <p className="mb-4">
-    My current installation, "TV Repairman," exemplifies this intersection of visual culture and technology. The project documents my journey of coding this website from scratch in 30 days, relying solely on found knowledge (books, YouTube, friendly conversations) and artificial intelligence (publicly accessible chatbots). It is currently on display at the <a href="http://www.feed.art" target="_blank" rel="noopener noreferrer">FEED Media Arts Center</a>.
-  </p>
-  <p>
-    Beyond my artistic practice, I take on projects supporting community development where I can contribute my skills and services. You can always find me downtown—capturing photographs, savoring tea and pastries in cafés, and losing myself in the library.
-  </p>
-              </motion.div>
+                {quotes[currentQuoteIndex].text}
+              </motion.p>
+              <motion.p 
+                className="text-red-500 text-lg font-medium"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
+                {quotes[currentQuoteIndex].author}
+              </motion.p>
             </div>
-          </main>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Progress indicators */}
+        <div className="absolute bottom-12 left-0 right-0 flex justify-center gap-3">
+          {quotes.map((_, index) => (
+            <div
+              key={index}
+              className={`h-2 w-2 rounded-full transition-all duration-300 ${
+                currentQuoteIndex === index ? 'bg-red-500 w-4' : 'bg-gray-500'
+              }`}
+            />
+          ))}
         </div>
       </div>
-      
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.6, duration: 0.5 }}
-        className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2"
-      >
-        <img 
-          className="h-56 w-full object-cover object-top sm:h-72 md:h-96 lg:w-full lg:h-full"
-          src="/public/biopic.jpeg"
-          alt="Ilyas"
-        />
-      </motion.div>
-    </motion.div>
+    </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
