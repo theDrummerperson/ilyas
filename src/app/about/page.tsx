@@ -1,156 +1,86 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 
-interface Quote {
-  text: string;
-  author: string;
+export default function Page() {
+ return (
+   <motion.div
+     initial={{ opacity: 0, y: 20 }}
+     animate={{ opacity: 1, y: 0 }}
+     transition={{ duration: 0.5 }}
+     id="about"
+     className="relative bg-white dark:bg-gray-900 min-h-screen"
+   >
+     <div className="max-w-7xl mx-auto">
+       {/* Mobile image section */}
+       <motion.div
+         initial={{ opacity: 0, scale: 0.95 }}
+         animate={{ opacity: 1, scale: 1 }}
+         transition={{ delay: 0.6, duration: 0.5 }}
+         className="w-full lg:hidden"
+       >
+         <div className="relative w-full h-[50vh]">
+           <img 
+             className="w-full h-full object-cover"
+             src="https://www.ilyasabukar.com/biopic.jpeg"
+             alt="Ilyas"
+           />
+           <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-sm font-light italic">
+             Photo by Brandon Lawrence (TheBrand Media Productions) 2025
+           </div>
+         </div>
+       </motion.div>
+
+       <div className="relative z-10 p-4 sm:p-6 lg:p-8 lg:max-w-[50%]">
+         <main className="mx-auto">
+           <div className="lg:text-left">
+             <motion.h2 
+               initial={{ opacity: 0, x: -20 }}
+               animate={{ opacity: 1, x: 0 }}
+               transition={{ delay: 0.2, duration: 0.5 }}
+               className="my-6 text-2xl tracking-tight font-extrabold text-gray-900 dark:text-white sm:text-3xl md:text-4xl"
+             >
+               About Me
+             </motion.h2>
+             <motion.div
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ delay: 0.4, duration: 0.5 }}
+               className="text-base text-gray-700 dark:text-gray-300 sm:text-lg space-y-4"
+             >
+               <p>
+                 I write and create experiences that explore the relationships between art, technology, and identity. Much of my time is spent examining Western ways of seeing the body and the built environment in modern society. As a visual artist, I'm particularly interested in how humans use visual narratives—distinct from oral and written forms—to explore our perceptual blind spots and challenge the common assumption that seeing equals understanding.
+               </p>
+               <p>
+                 My current installation, "TV Repairman," exemplifies this intersection of visual culture and technology. The project documents my journey of coding this website from scratch in 30 days, relying solely on found knowledge (books, YouTube, friendly conversations) and artificial intelligence (publicly accessible chatbots). It is currently on display at the <a href="http://www.feed.art" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300">FEED Media Arts Center</a>.
+               </p>
+               <p>
+                 Beyond my artistic practice, I take on projects supporting community development where I can contribute my skills and services. You can always find me downtown—capturing photographs, savoring tea and pastries in cafés, and losing myself in the library.
+               </p>
+             </motion.div>
+           </div>
+         </main>
+       </div>
+     </div>
+     
+     {/* Desktop image section */}
+     <motion.div 
+       initial={{ opacity: 0, scale: 0.95 }}
+       animate={{ opacity: 1, scale: 1 }}
+       transition={{ delay: 0.6, duration: 0.5 }}
+       className="hidden lg:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2"
+     >
+       <div className="relative h-full">
+         <img 
+           className="absolute inset-0 w-full h-full object-cover"
+           src="https://www.ilyasabukar.com/biopic.jpeg"
+           alt="Ilyas"
+         />
+         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center text-sm font-light italic">
+           Photo by Brandon Lawrence (TheBrand Media Productions) 2025
+         </div>
+       </div>
+     </motion.div>
+   </motion.div>
+ );
 }
-
-export default function Home() {
-  const quotes: Quote[] = [
-    {
-      text: "Love itself, the subversive gift, is an important public good, and loving is a significant political act.",
-      author: "- Richard Iton",
-    },
-    {
-      text: "...respect black noise—the shrieks, the moans, the nonsense, and the opacity, which are always in excess of legibility and of the law.",
-      author: "- Saidiya Hartman",
-    },
-    {
-      text: "I'm like Carrie Bradshaw with a back brace on.",
-      author: "- Doechii",
-    },
-  ];
-
-  const [[currentQuoteIndex, direction], setCurrentQuote] = useState([0, 0]);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  // Auto-rotation
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    
-    const intervalId = setInterval(() => {
-      setCurrentQuote(prev => [(prev[0] + 1) % quotes.length, 1]);
-    }, 5000);
-
-    return () => clearInterval(intervalId);
-  }, [quotes.length, isAutoPlaying]);
-
-  const paginate = (newDirection: number) => {
-    setIsAutoPlaying(false);
-    setCurrentQuote(prev => {
-      const nextIndex = prev[0] + newDirection;
-      if (nextIndex < 0) return [quotes.length - 1, newDirection];
-      if (nextIndex >= quotes.length) return [0, newDirection];
-      return [nextIndex, newDirection];
-    });
-  };
-
-  const swipeConfidenceThreshold = 10000;
-  const swipePower = (offset: number, velocity: number) => {
-    return Math.abs(offset) * velocity;
-  };
-
-  return (
-    <div 
-      className="min-h-screen relative overflow-hidden"
-      style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.80), rgba(0, 0, 0, 0.90)), url("/azores.jpeg")`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}
-    >
-      <div className="h-screen flex items-center justify-center px-4">
-        <AnimatePresence initial={false} custom={direction} mode="wait">
-          <motion.div
-            key={currentQuoteIndex}
-            custom={direction}
-            variants={{
-              enter: (direction: number) => ({
-                x: direction > 0 ? 1000 : -1000,
-                opacity: 0
-              }),
-              center: {
-                zIndex: 1,
-                x: 0,
-                opacity: 1
-              },
-              exit: (direction: number) => ({
-                zIndex: 0,
-                x: direction < 0 ? 1000 : -1000,
-                opacity: 0
-              })
-            }}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 }
-            }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={1}
-            onDragEnd={(e, { offset, velocity }) => {
-              const swipe = swipePower(offset.x, velocity.x);
-
-              if (swipe < -swipeConfidenceThreshold) {
-                paginate(1);
-              } else if (swipe > swipeConfidenceThreshold) {
-                paginate(-1);
-              }
-            }}
-            className="absolute w-full px-4"
-          >
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 max-w-lg mx-auto">
-              <motion.p 
-                className="text-xl sm:text-2xl text-white mb-6 leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                {quotes[currentQuoteIndex].text}
-              </motion.p>
-              <motion.p 
-                className="text-red-500 text-lg font-medium"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-              >
-                {quotes[currentQuoteIndex].author}
-              </motion.p>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Progress indicators */}
-        <div className="absolute bottom-12 left-0 right-0 flex justify-center gap-3">
-          {quotes.map((_, index) => (
-            <div
-              key={index}
-              className={`h-2 w-2 rounded-full transition-all duration-300 ${
-                currentQuoteIndex === index ? 'bg-red-500 w-4' : 'bg-gray-500'
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
