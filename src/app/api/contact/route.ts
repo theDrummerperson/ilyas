@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+
 // Add debug logging for environment variables (don't log the actual password!)
 console.log('Email Config:', {
   host: process.env.SMTP_HOST,
