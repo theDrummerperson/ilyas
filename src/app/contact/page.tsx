@@ -1,6 +1,41 @@
 'use client';
-import React from 'react';
+import React, { Suspense } from 'react';
+import { Loader2 } from 'lucide-react';
 import ContactForm from '@/components/ContactForm';
+
+// Loading component
+const LoadingFallback = () => (
+  <div className="flex justify-center items-center min-h-[300px]">
+    <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+  </div>
+);
+
+// Error boundary component
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(_: Error) {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="p-4 my-4 bg-red-50 border border-red-200 rounded-md text-red-800">
+          Something went wrong loading the contact form. Please refresh the page to try again.
+        </div>
+      );
+    }
+
+    return this.props.children;
+  }
+}
 
 export default function ContactPage() {
   return (
@@ -15,7 +50,11 @@ export default function ContactPage() {
           </p>
         </div>
         <div className="mt-12">
-          <ContactForm />
+          <ErrorBoundary>
+            <Suspense fallback={<LoadingFallback />}>
+              <ContactForm />
+            </Suspense>
+          </ErrorBoundary>
         </div>
       </div>
     </div>
