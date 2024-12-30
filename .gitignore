@@ -1,3 +1,8 @@
+# Create or edit .gitignore
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 node_modules/
 .next/
-.env*.local
