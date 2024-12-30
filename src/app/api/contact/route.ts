@@ -1,69 +1,60 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-// Type for environment validation
-type EnvCheck = {
-  isProduction: boolean;
-  hasHost: boolean;
-  hasPort: boolean;
-  hasUser: boolean;
-  hasPass: boolean;
-  hasContactEmail: boolean;
-};
-
-// Validate environment variables at startup
-const validateEnv = (): EnvCheck => {
-  const check = {
-    isProduction: process.env.NODE_ENV === 'production',
-    hasHost: !!process.env.SMTP_HOST,
-    hasPort: !!process.env.SMTP_PORT,
-    hasUser: !!process.env.SMTP_USER,
-    hasPass: !!process.env.SMTP_PASSWORD,
-    hasContactEmail: !!process.env.CONTACT_EMAIL,
-  };
-
-  console.log('Environment validation:', check);
-  return check;
-};
-
-// Create mail transporter
-const createTransporter = () => {
-  return nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT),
-    secure: process.env.SMTP_PORT === '465',
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD,
-    },
-  });
-};
+// Type definitions for errors
+interface SMTPError extends Error {
+  code?: string;
+  command?: string;
+  responseCode?: number;
+}
 
 export async function POST(request: Request) {
   try {
-    // Validate environment - only check required variables
-    const envCheck = validateEnv();
-    const requiredVars = {
-      hasHost: envCheck.hasHost,
-      hasPort: envCheck.hasPort,
-      hasUser: envCheck.hasUser,
-      hasPass: envCheck.hasPass,
-      hasContactEmail: envCheck.hasContactEmail,
-    };
-
-    if (!Object.values(requiredVars).every(Boolean)) {
-      console.error('Missing required environment variables:', requiredVars);
-      throw new Error('Missing required environment variables');
-    }
-
-    // Parse incoming request
-    const formData = await request.json();
-    console.log('Received form data:', {
-      ...formData,
-      message: formData.message?.slice(0, 50) + '...' // Log truncated message
+    // Log all env variables (except password)
+    console.log('Environment check:', {
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
+      user: process.env.SMTP_USER,
+      hasPassword: !!process.env.SMTP_PASSWORD,
+      contactEmail: process.env.CONTACT_EMAIL
     });
 
-    // Validate form data
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASSWORD
+      },
+    });
+
+    // Test SMTP connection
+    try {
+      console.log('Verifying SMTP connection...');
+      await transporter.verify();
+      console.log('SMTP connection verified successfully');
+    } catch (error) {
+      const smtpError = error as SMTPError;
+      console.error('SMTP verification failed:', {
+        error: smtpError,
+        message: smtpError.message,
+        code: smtpError.code,
+        command: smtpError.command,
+        responseCode: smtpError.responseCode
+      });
+      throw new Error(`SMTP verification failed: ${smtpError.message}`);
+    }
+
+    const formData = await request.json();
+    
+    // Log form data (excluding sensitive info)
+    console.log('Form data received:', {
+      hasName: !!formData.name,
+      hasEmail: !!formData.email,
+      hasMessage: !!formData.message
+    });
+
     if (!formData.name || !formData.email || !formData.message) {
       return NextResponse.json(
         { message: 'Missing required fields' },
@@ -71,28 +62,11 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create and verify transporter
-    const transporter = createTransporter();
-    try {
-      await transporter.verify();
-      console.log('SMTP connection verified successfully');
-    } catch (smtpError) {
-      console.error('SMTP verification failed:', smtpError);
-      throw new Error('Failed to connect to email server');
-    }
-
-    // Prepare email
     const mailOptions = {
       from: `"Contact Form" <${process.env.SMTP_USER}>`,
       to: process.env.CONTACT_EMAIL,
       subject: `New Contact Form Message from ${formData.name}`,
-      text: `
-        Name: ${formData.name}
-        Email: ${formData.email}
-        
-        Message:
-        ${formData.message}
-      `,
+      text: `Name: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message}`,
       html: `
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${formData.name}</p>
@@ -102,33 +76,38 @@ export async function POST(request: Request) {
       `,
     };
 
-    // Send email
-    console.log('Attempting to send email...');
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully:', {
-      messageId: info.messageId,
-      response: info.response
+    console.log('Attempting to send email with options:', {
+      from: mailOptions.from,
+      to: mailOptions.to,
+      subject: mailOptions.subject
     });
+
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully:', info);
 
     return NextResponse.json(
       { message: 'Email sent successfully' },
       { status: 200 }
     );
   } catch (error) {
-    // Detailed error logging
-    const typedError = error as Error;
-    console.error('Detailed error:', {
+    const typedError = error as SMTPError;
+    console.error('Detailed error information:', {
       name: typedError.name,
       message: typedError.message,
+      code: typedError.code,
+      command: typedError.command,
+      responseCode: typedError.responseCode,
       stack: typedError.stack
     });
 
     return NextResponse.json(
-      {
+      { 
         message: 'Failed to send email',
-        error: typedError.message || 'Unknown error'
+        error: typedError.message,
+        code: typedError.code || 'NO_CODE'
       },
       { status: 500 }
     );
   }
 }
+
