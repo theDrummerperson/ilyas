@@ -1,63 +1,78 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+// Type definitions
+interface ContactForm {
+  name: string;
+  email: string;
+  message: string;
+}
+
+// Create reusable transporter object using SMTP transport
 const transporter = nodemailer.createTransport({
-  host: 'smtp.squarespace.com',
-  port: 465,
-  secure: true,
+  host: process.env.SMTP_HOST,
+  port: Number(process.env.SMTP_PORT) || 465,
+  secure: true, // true for 465, false for other ports
   auth: {
-    user: process.env.SQUARESPACE_EMAIL,
-    pass: process.env.SQUARESPACE_APP_PASSWORD,
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
   },
+  // Add timeout settings
+  tls: {
+    rejectUnauthorized: false
+  },
+  connectionTimeout: 10000, // 10 seconds
+  socketTimeout: 10000, // 10 seconds
 });
 
 export async function POST(request: Request) {
   try {
-    const formData = await request.json();
-    console.log('Received form data:', formData);
-
-    const { name, email, message } = formData;
-
-    if (!name || !email || !message) {
-      console.log('Missing required fields:', formData);
+    const data: ContactForm = await request.json();
+    
+    // Validate input
+    if (!data.name || !data.email || !data.message) {
       return NextResponse.json(
         { message: 'Missing required fields' },
         { status: 400 }
       );
     }
 
-    console.log('Attempting to send email...');
-
+    // Prepare email content
     const mailOptions = {
-      from: `"Contact Form" <${process.env.SQUARESPACE_EMAIL}>`,
-      to: process.env.CONTACT_EMAIL,
-      subject: `New Contact Form Message from ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+      from: `"Contact Form" <${process.env.SMTP_USER}>`,
+      to: process.env.RECIPIENT_EMAIL || data.email, // Fallback to sender's email if recipient not configured
+      subject: `New Contact Form Message from ${data.name}`,
+      text: `
+        Name: ${data.name}
+        Email: ${data.email}
+        Message: ${data.message}
+      `,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Name:</strong> ${data.name}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <p>${data.message}</p>
       `,
     };
 
-    console.log('Mail options prepared:', { ...mailOptions, text: '[truncated]' });
-
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully:', info);
+    // Send email
+    await transporter.sendMail(mailOptions);
 
     return NextResponse.json(
       { message: 'Email sent successfully' },
       { status: 200 }
     );
+
   } catch (error) {
-    console.error('Detailed error:', error);
+    // Type guard for error object
     if (error instanceof Error) {
+      console.error('Detailed error:', error.message);
       console.error('Error stack trace:', error.stack);
     } else {
-      console.error('Unknown error:', error);
+      console.error('An unknown error occurred:', error);
     }
+
     return NextResponse.json(
       {
         message: 'Failed to send email',
