@@ -1,35 +1,51 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-// Type definitions
 interface ContactForm {
   name: string;
   email: string;
   message: string;
 }
 
-// Create reusable transporter object using SMTP transport
+interface SMTPError extends Error {
+  code?: string;
+  command?: string;
+}
+
+// Log environment check
+console.log('Environment check:', {
+  hasSmtpPass: !!process.env.SMTP_PASS,
+  hasRecipient: !!process.env.RECIPIENT_EMAIL
+});
+
 const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT) || 465,
-  secure: true, // true for 465, false for other ports
+  host: 'smtp.squarespace.com',
+  port: 587,  // Changed to 587 for TLS
+  secure: false,  // False for TLS
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
+    user: 'iabukar@holland-st.com',
+    pass: process.env.SMTP_PASS
   },
-  // Add timeout settings
+  debug: true,
+  logger: true,
   tls: {
     rejectUnauthorized: false
-  },
-  connectionTimeout: 10000, // 10 seconds
-  socketTimeout: 10000, // 10 seconds
+  }
+});
+
+// Verify transport configuration
+transporter.verify(function(error, success) {
+  if (error) {
+    console.error('Transport verification failed:', error);
+  } else {
+    console.log('Server is ready to send emails');
+  }
 });
 
 export async function POST(request: Request) {
   try {
     const data: ContactForm = await request.json();
     
-    // Validate input
     if (!data.name || !data.email || !data.message) {
       return NextResponse.json(
         { message: 'Missing required fields' },
@@ -37,10 +53,12 @@ export async function POST(request: Request) {
       );
     }
 
-    // Prepare email content
     const mailOptions = {
-      from: `"Contact Form" <${process.env.SMTP_USER}>`,
-      to: process.env.RECIPIENT_EMAIL || data.email, // Fallback to sender's email if recipient not configured
+      from: {
+        name: 'Holland Street Contact Form',
+        address: 'iabukar@holland-st.com'
+      },
+      to: process.env.RECIPIENT_EMAIL || 'ilyasabukar@gmail.com',
       subject: `New Contact Form Message from ${data.name}`,
       text: `
         Name: ${data.name}
@@ -53,33 +71,34 @@ export async function POST(request: Request) {
         <p><strong>Email:</strong> ${data.email}</p>
         <p><strong>Message:</strong></p>
         <p>${data.message}</p>
-      `,
+      `
     };
 
-    // Send email
-    await transporter.sendMail(mailOptions);
-
+    console.log('Attempting to send email...');
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully:', info.messageId);
+    
     return NextResponse.json(
-      { message: 'Email sent successfully' },
+      { 
+        message: 'Email sent successfully',
+        id: info.messageId
+      },
       { status: 200 }
     );
 
-  } catch (error: unknown) {
-    // Log the error safely
-    console.error('An error occurred:', error);
-
-    // Type guard for Error objects
-    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-    const errorStack = error instanceof Error ? error.stack : undefined;
-
-    if (errorStack) {
-      console.error('Stack trace:', errorStack);
-    }
+  } catch (error) {
+    const smtpError = error as SMTPError;
+    console.error('Detailed send error:', {
+      message: smtpError.message,
+      code: smtpError.code,
+      name: smtpError.name
+    });
 
     return NextResponse.json(
       {
         message: 'Failed to send email',
-        error: errorMessage,
+        error: smtpError.message || 'Connection error',
+        code: smtpError.code
       },
       { status: 500 }
     );

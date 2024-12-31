@@ -1,6 +1,8 @@
 import './styles/tailwind.css'
 import './styles/globals.css'
 
+
+
 import { PropsWithChildren } from 'react'
 import { Inter } from 'next/font/google'
 import MainLayout from '@/components/layouts/MainLayout'
