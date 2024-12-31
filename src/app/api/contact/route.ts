@@ -53,7 +53,11 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     console.error('Detailed error:', error);
-    console.error('Error stack trace:', error.stack);
+    if (error instanceof Error) {
+      console.error('Error stack trace:', error.stack);
+    } else {
+      console.error('Unknown error:', error);
+    }
     return NextResponse.json(
       {
         message: 'Failed to send email',
