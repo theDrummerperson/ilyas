@@ -64,19 +64,22 @@ export async function POST(request: Request) {
       { status: 200 }
     );
 
-  } catch (error) {
-    // Type guard for error object
-    if (error instanceof Error) {
-      console.error('Detailed error:', error.message);
-      console.error('Error stack trace:', error.stack);
-    } else {
-      console.error('An unknown error occurred:', error);
+  } catch (error: unknown) {
+    // Log the error safely
+    console.error('An error occurred:', error);
+
+    // Type guard for Error objects
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+    const errorStack = error instanceof Error ? error.stack : undefined;
+
+    if (errorStack) {
+      console.error('Stack trace:', errorStack);
     }
 
     return NextResponse.json(
       {
         message: 'Failed to send email',
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: errorMessage,
       },
       { status: 500 }
     );
