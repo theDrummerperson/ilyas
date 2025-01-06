@@ -5,10 +5,10 @@ module.exports = {
     node: true,
   },
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'next/core-web-vitals',
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    'next/core-web-vitals', // Move this to the end
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -16,21 +16,21 @@ module.exports = {
       jsx: true,
     },
     ecmaVersion: 12,
-    sourceType: 'module',
+    sourceType: "module",
   },
   plugins: [
-    'react',
-    '@typescript-eslint',
+    "react",
+    "@typescript-eslint",
   ],
   rules: {
-    'quotes': ['error', 'double'],
-    'react/react-in-jsx-scope': 'off',
-    '@typescript-eslint/no-unused-vars': ['warn', { 'argsIgnorePattern': '^_' }],
+    "quotes": ["error", "double"], 
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-unused-vars": ['warn', { "argsIgnorePattern": "^_"}],
     // other rules...
   },
   settings: {
     react: {
-      version: 'detect',
+      version: "detect",
     },
   },
 };

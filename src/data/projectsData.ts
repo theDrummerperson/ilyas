@@ -54,32 +54,32 @@ I did not complete the website in 30 days. In fact, I didn't get far. But that w
     gallery: [
       {
         src: "/feed-1.jpg",
-        alt: "'TV Repairman' @ FEED Media Arts Center",
-        caption: "Community members engaging with the project through conversation about art and technology"
+       alt: "\"TV Repairman\" @ FEED Media Arts Center",
+      caption: "Community members engaging with the project through conversation about art and technology"
       },
       {
-        src: "/feed-2.jpg",
-        alt: "'TV Repairman' @ FEED Media Arts Center",
-        caption: "Here I am explaning to community members why a browser can be a canvas for art."
+      src: "/feed-2.jpg",
+      alt: "\"TV Repairman\" @ FEED Media Arts Center",
+     caption:  "Here I am explaning to community members why a browser can be a canvas for art."
       },
       {
         src: "/feed-3.jpg",
-        alt: "'TV Repairman' @ FEED Media Arts Center",
+        alt: "\"TV Repairman\" @ FEED Media Arts Center",
         caption: "A student from Edinboro University enjoys the curated installation of Anisha Baid's work presented in conversation with 'TV Repairman'."
       },
       {
         src: "/feed-4.jpg",
-        alt: "'TV Repairman' @ FEED Media Arts Center",
+        alt: "\"TV Repairman\" @ FEED Media Arts Center",
         caption: "Here a community member teaches me about the benefits of using Tailwind CSS, which I go on to implement in the project."
       },
       {
         src: "/feed-5.jpg",
-        alt: "'TV Repairman' @ FEED Media Arts Center",
+        alt: "\"TV Repairman\" @ FEED Media Arts Center",
         caption: "New friend and computer programmer Aashish teaches me about how to use a terminal properly."
       },
       {
         src: "/feed-6.jpg",
-        alt: "'TV Repairman' @ FEED Media Arts Center",
+        alt: "\"TV Repairman\" @ FEED Media Arts Center",
         caption: "New friend and media specialist Brandon Lawrence and I talk Capitalism and art."
       }
     ]

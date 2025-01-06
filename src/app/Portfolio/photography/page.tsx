@@ -41,7 +41,7 @@ const PhotographyPage = () => {
       location: "Berlin, Germany",
       dateTaken: "2019",
       camera: "Canon EOS R5",
-      story: "Street photography capturing Berlin's unique urban culture.",
+      story: "Street photography capturing the unique urban culture of Berlin.",
       category: "Places"
     },
     {

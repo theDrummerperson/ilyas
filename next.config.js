@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+/** @type {import("next").NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
@@ -6,7 +6,6 @@ const nextConfig = {
   },
   images: {
     domains: ["ilyasabukar.com"],
-    domains: ['images.unsplash.com']
   },
 };
 
