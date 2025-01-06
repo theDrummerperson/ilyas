@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { Camera, MapPin, Calendar, Info } from 'lucide-react';
+import React, { useState } from "react";
+import Image from "next/image";
+import { Camera, MapPin, Calendar, Info } from "lucide-react";
 
 interface PhotographyCardProps {
   image: {
@@ -31,7 +31,7 @@ const PhotographyCard: React.FC<PhotographyCardProps> = ({
   };
 
   return (
-    <div className={`group relative overflow-hidden rounded-2xl shadow-lg transition-transform duration-300 hover:scale-105 ${lightTheme ? 'bg-white' : 'bg-gray-800'}`}>
+    <div className={`group relative overflow-hidden rounded-2xl shadow-lg transition-transform duration-300 hover:scale-105 ${lightTheme ? "bg-white" : "bg-gray-800"}`}>
       {/* Main Image */}
       <div className="relative aspect-[3/4] w-full overflow-hidden">
         <Image
@@ -56,8 +56,8 @@ const PhotographyCard: React.FC<PhotographyCardProps> = ({
         </button>
 
         {/* Image Details Overlay */}
-        <div className={`absolute inset-x-0 bottom-0 p-4 transform ${showInfo ? 'translate-y-0' : 'translate-y-full'} transition-transform duration-300`}>
-          <div className={`bg-white/95 backdrop-blur-sm rounded-xl p-4 text-gray-700 space-y-2 shadow-lg ${lightTheme ? 'text-gray-700' : 'text-gray-200'}`}>
+        <div className={`absolute inset-x-0 bottom-0 p-4 transform ${showInfo ? "translate-y-0" : "translate-y-full"} transition-transform duration-300`}>
+          <div className={`bg-white/95 backdrop-blur-sm rounded-xl p-4 text-gray-700 space-y-2 shadow-lg ${lightTheme ? "text-gray-700" : "text-gray-200"}`}>
             {image.location && (
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-blue-500" />

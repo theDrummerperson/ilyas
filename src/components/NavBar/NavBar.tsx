@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -80,11 +82,11 @@ const NavBar = () => {
               />
             </span>
             <ChevronDown 
-              className={`w-4 h-4 transition-transform duration-200 ${isHovered ? 'rotate-180' : ''}`}
+              className={`w-4 h-4 transition-transform duration-200 ${isHovered ? "rotate-180" : ""}`}
             />
           </button>
         ) : (
-          <Link href={href || '#'} className="group relative py-2 text-sm font-medium text-gray-800">
+          <Link href={href || "#"} className="group relative py-2 text-sm font-medium text-gray-800">
             <span className="relative">
               {label}
               <motion.div 
@@ -133,8 +135,8 @@ const NavBar = () => {
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           isScrolled 
-            ? 'backdrop-blur-md bg-white/80 shadow-lg' 
-            : 'bg-white'
+            ? "backdrop-blur-md bg-white/80 shadow-lg" 
+            : "bg-white"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6">

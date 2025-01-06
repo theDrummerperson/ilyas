@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, X } from 'lucide-react';
+import React, { useState } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, X } from "lucide-react";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -125,7 +125,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navLinks }) =>
                           <span className="font-medium">{link.label}</span>
                           <ChevronDown 
                             className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
-                              openDropdown === link.label ? 'rotate-180' : ''
+                              openDropdown === link.label ? "rotate-180" : ""
                             }`}
                           />
                         </motion.button>
@@ -155,7 +155,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navLinks }) =>
                     ) : (
                       <motion.div variants={linkVariants}>
                         <Link
-                          href={link.href || '#'}
+                          href={link.href || "#"}
                           className="block p-3 text-gray-700 hover:bg-gray-50 rounded-lg font-medium"
                           onClick={onClose}
                         >

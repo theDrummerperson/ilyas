@@ -11,9 +11,7 @@ interface Post {
   slug: string;
 }
 
-interface BlogPageProps {
-  posts: Post[];
-}
+
 
 // Function to get all posts
 async function getAllPosts() {

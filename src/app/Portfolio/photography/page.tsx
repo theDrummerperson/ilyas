@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 import PhotographyCard from "../../../components/Portfolio/PhotographyCard";
-import { Filter, ChevronDown } from 'lucide-react';
+
 
 const PhotographyPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
   const photographyCollection = [
     {
@@ -173,13 +173,13 @@ const PhotographyPage = () => {
   ];
 
   const categories = [
-    { id: 'all', label: 'All Work' },
-    { id: 'Places', label: 'Places' },
-    { id: 'Faces', label: 'Faces' },
+    { id: "all", label: "All Work" },
+    { id: "Places", label: "Places" },
+    { id: "Faces", label: "Faces" },
   ];
 
   const filteredImages = photographyCollection.filter(img =>
-    selectedCategory === 'all' || img.category === selectedCategory
+    selectedCategory === "all" || img.category === selectedCategory
   );
 
   return (
@@ -204,8 +204,8 @@ const PhotographyPage = () => {
                 onClick={() => setSelectedCategory(category.id)}
                 className={`px-6 py-2 rounded-full transition-colors duration-200 ${
                   selectedCategory === category.id
-                    ? 'bg-blue-500 text-white shadow-md'
-                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                    ? "bg-blue-500 text-white shadow-md"
+                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
                 }`}
               >
                 {category.label}

@@ -1,14 +1,13 @@
-// src/app/Portfolio/projects/[projectId]/page.tsx
-
 "use client";
+
 
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, MapPin, ArrowRight, Link as LinkIcon } from 'lucide-react';
-import { projectsData } from '@/data/projectsData';
+import { ArrowLeft, Calendar, MapPin, ArrowRight } from "lucide-react";
+import { projectsData } from "@/data/projectsData";
 
 const ProjectDetailPage = () => {
   const params = useParams();
@@ -26,6 +25,25 @@ const ProjectDetailPage = () => {
   if (!project) {
     return null;
   }
+
+  const formatParagraph = (paragraph: string) => {
+    const parts = paragraph.split(/(".*?")/g);
+    return (
+      <span>
+        {parts.map((part, i) => {
+          if (part.startsWith("\"") && part.endsWith("\"")) {
+            const quote = part.slice(1, -1);
+            return (
+              <span key={i} className="font-semibold text-gray-800">
+                &ldquo;{quote}&rdquo;
+              </span>
+            );
+          }
+          return part;
+        })}
+      </span>
+    );
+  };
 
   return (
     <motion.article
@@ -54,7 +72,7 @@ const ProjectDetailPage = () => {
             <ArrowLeft className="w-4 h-4" />
             Back to Projects
           </motion.button>
-          <motion.h1 
+          <motion.h1
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.6 }}
@@ -62,7 +80,7 @@ const ProjectDetailPage = () => {
           >
             {project.title}
           </motion.h1>
-          <motion.div 
+          <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3 }}
@@ -91,29 +109,15 @@ const ProjectDetailPage = () => {
         >
           <h2 className="text-4xl font-bold text-gray-900 mb-8">Overview</h2>
           <div className="prose prose-lg max-w-none">
-            {project.overview.split('\n\n').map((paragraph, index) => (
-              <motion.p 
+            {project.overview.split("\n\n").map((paragraph, index) => (
+              <motion.p
                 key={index}
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.4 + index * 0.1 }}
                 className="mb-6 text-gray-600 leading-relaxed text-lg"
               >
-                {paragraph.includes('"') ? (
-                  <span>
-                    {paragraph.split('"').map((part, i) => (
-                      <React.Fragment key={i}>
-                        {i % 2 === 1 ? (
-                          <span className="font-semibold text-gray-800">"{part}"</span>
-                        ) : (
-                          part
-                        )}
-                      </React.Fragment>
-                    ))}
-                  </span>
-                ) : (
-                  paragraph
-                )}
+                {formatParagraph(paragraph)}
               </motion.p>
             ))}
           </div>

@@ -1,10 +1,8 @@
 "use client"
 
-
-import React, { useState } from 'react';
+import React from "react";
 import Image from "next/image";
-import { motion } from 'framer-motion';
-import { Calendar, Clock, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, ArrowRight } from "lucide-react";
 
 interface WritingCardProps {
   imageSrc: string;
@@ -29,14 +27,8 @@ const WritingCard: React.FC<WritingCardProps> = ({
   readTime = "5 min read",
   date = "Jan 2024"
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
-    <div 
-      className="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <div className="group relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden">
       {/* Image Container with Gradient Overlay */}
       <div className="relative h-64 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10" />

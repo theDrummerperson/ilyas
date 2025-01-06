@@ -44,7 +44,7 @@ export default function HomeClientComponent() {
                 transition={{ delay: 0.6, duration: 0.8 }}
               >
                 <p className="text-lg lg:text-xl italic text-gray-800 dark:text-gray-200">
-                  "Love itself, the subversive gift, is an important public good, and loving is a significant political act, particularly among those stigmatized and marked as unworthy of love and incapable of deep commitment."
+                  &ldquo;Love itself, the subversive gift, is an important public good, and loving is a significant political act, particularly among those stigmatized and marked as unworthy of love and incapable of deep commitment.&rdquo;
                 </p>
                 <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
                   - Richard Iton, <em>In Search of the Black Fantastic</em>

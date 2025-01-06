@@ -5,7 +5,6 @@ import Link from "next/link";
 import { Code, Newspaper, Camera, ArrowUpRight, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";
 import SocialLinks from "./SocialLinks";
-import FooterLinks from "./FooterLinks";
 
 const Footer = () => {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
@@ -23,19 +22,21 @@ const Footer = () => {
   ];
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer className="relative w-full bg-gradient-to-b from-black to-gray-900 text-white" role="contentinfo" aria-label="Site footer">
-      {/* Top Wave Decoration */}
+    <footer
+      className="relative w-full bg-gradient-to-b from-black to-gray-900 text-white"
+      role="contentinfo"
+      aria-label="Site footer"
+    >
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-30" />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 md:px-12">
         <div className="pt-16 pb-12">
           <div className="grid grid-cols-12 gap-8 md:gap-12">
-            {/* Brand Section */}
-            <motion.div 
+            <motion.div
               className="col-span-12 md:col-span-4 space-y-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -43,33 +44,29 @@ const Footer = () => {
               transition={{ duration: 0.5 }}
             >
               <div className="space-y-4">
-                <Link
-                  href="/"
-                  className="inline-block text-2xl font-bold"
-                >
+                <Link href="/" className="inline-block text-2xl font-bold">
                   <span className="text-red-500">a.</span>
                   <span className="text-white">Ilyas Abukar</span>
                 </Link>
-                <p className="text-gray-400 text-lg">
-                  Designer, Writer, & Artist
-                </p>
+                <p className="text-gray-400 text-lg">Designer, Writer, & Artist</p>
                 <div className="pt-4">
                   <SocialLinks />
                 </div>
               </div>
             </motion.div>
 
-            {/* Portfolio Links */}
-            <motion.div 
+            <motion.div
               className="col-span-6 md:col-span-4 space-y-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <div 
-                className="space-y-4"
-                onMouseEnter={() => setHoveredSection('portfolio')}
+              <div
+                className={`space-y-4 p-4 rounded-lg transition-colors duration-300 ${
+                  hoveredSection === "portfolio" ? "bg-gray-800/50" : ""
+                }`}
+                onMouseEnter={() => setHoveredSection("portfolio")}
                 onMouseLeave={() => setHoveredSection(null)}
               >
                 <h3 className="text-lg font-semibold text-white tracking-wider">
@@ -91,17 +88,18 @@ const Footer = () => {
               </div>
             </motion.div>
 
-            {/* Connect Links */}
-            <motion.div 
+            <motion.div
               className="col-span-6 md:col-span-4 space-y-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <div 
-                className="space-y-4"
-                onMouseEnter={() => setHoveredSection('connect')}
+              <div
+                className={`space-y-4 p-4 rounded-lg transition-colors duration-300 ${
+                  hoveredSection === "connect" ? "bg-gray-800/50" : ""
+                }`}
+                onMouseEnter={() => setHoveredSection("connect")}
                 onMouseLeave={() => setHoveredSection(null)}
               >
                 <h3 className="text-lg font-semibold text-white tracking-wider">
@@ -124,7 +122,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Section */}
         <div className="border-t border-gray-800 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
@@ -141,7 +138,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Wave Decoration */}
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-30" />
     </footer>
   );
