@@ -1,6 +1,5 @@
 "use client";
 
-
 import React from "react";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
@@ -8,6 +7,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, MapPin, ArrowRight } from "lucide-react";
 import { projectsData } from "@/data/projectsData";
+import LightboxGallery from "@/components/LightboxGallery"; // Make sure to import LightboxGallery correctly
 
 const ProjectDetailPage = () => {
   const params = useParams();
@@ -178,6 +178,18 @@ const ProjectDetailPage = () => {
                 </figcaption>
               </motion.figure>
             ))}
+          </div>
+        </motion.div>
+
+        {/* Lightbox Gallery */}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="mb-20"
+        >
+          <div className="w-full">
+            <LightboxGallery images={project.gallery} />
           </div>
         </motion.div>
 

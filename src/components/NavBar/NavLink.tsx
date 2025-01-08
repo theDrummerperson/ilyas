@@ -1,7 +1,6 @@
 "use client";
 
-
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 import type { NavLinkType } from "./types";
@@ -36,15 +35,19 @@ const DropdownTrigger: React.FC<DropdownTriggerProps> = ({
   onToggle,
   subLinks,
 }) => {
+  const [isHovered, setIsHovered] = React.useState(false); // New state variable to track hover state
+
   return (
     <div className="relative">
       <button
         className={`text-gray-400 hover:text-red-600 transition-all duration-200 flex items-center group ${
-          isOpen ? "text-red-600" : ""
+          isOpen || isHovered ? "text-red-600" : "" // Apply hover style when hovered
         }`}
         aria-expanded={isOpen}
         aria-haspopup="true"
         onClick={onToggle}
+        onMouseEnter={() => setIsHovered(true)} // Update state on mouse enter
+        onMouseLeave={() => setIsHovered(false)} // Update state on mouse leave
       >
         {label}
         <ChevronDown

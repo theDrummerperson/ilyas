@@ -12,10 +12,10 @@ export default function HomeClientComponent() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024);
     };
-    
+
     checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   return (
@@ -37,7 +37,7 @@ export default function HomeClientComponent() {
               className="object-cover"
               sizes="100vw"
             />
-            <motion.div 
+            <motion.div
               className="absolute inset-0 flex flex-col justify-end"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -58,7 +58,7 @@ export default function HomeClientComponent() {
                     Creating at the intersection of art, technology, and identity
                   </p>
                 </div>
-                
+
                 {/* Decorative elements */}
                 <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent"></div>
                 <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-red-500/20 to-transparent"></div>
@@ -80,10 +80,9 @@ export default function HomeClientComponent() {
               className="space-y-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-            >
+              transition={{ delay: 0.2, duration: 0.8 }}>
               {/* Hide h1 on mobile since we show it in the hero image */}
-              <h1 className={`${isMobile ? 'sr-only' : 'text-5xl md:text-6xl lg:text-7xl'} font-extrabold tracking-tight`}>
+              <h1 className={`${isMobile ? "sr-only" : "text-5xl md:text-6xl lg:text-7xl"} font-extrabold tracking-tight`}>
                 <span className="block text-gray-900 dark:text-white">
                   Artist &
                 </span>

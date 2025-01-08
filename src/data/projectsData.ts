@@ -1,11 +1,9 @@
-
-
-// src/data/projectsData.ts
-
 interface ProjectGalleryItem {
   src: string;
   alt: string;
   caption: string;
+  width: number;
+  height: number;
 }
 
 export interface Project {
@@ -54,33 +52,45 @@ I did not complete the website in 30 days. In fact, I didn't get far. But that w
     gallery: [
       {
         src: "/feed-1.jpg",
-       alt: "\"TV Repairman\" @ FEED Media Arts Center",
-      caption: "Community members engaging with the project through conversation about art and technology"
+        alt: "\"TV Repairman\" @ FEED Media Arts Center",
+        caption: "Community members engaging with the project through conversation about art and technology",
+        width: 800,
+        height: 600
       },
       {
-      src: "/feed-2.jpg",
-      alt: "\"TV Repairman\" @ FEED Media Arts Center",
-     caption:  "Here I am explaning to community members why a browser can be a canvas for art."
+        src: "/feed-2.jpg",
+        alt: "\"TV Repairman\" @ FEED Media Arts Center",
+        caption: "Here I am explaining to community members why a browser can be a canvas for art.",
+        width: 800,
+        height: 600
       },
       {
         src: "/feed-3.jpg",
         alt: "\"TV Repairman\" @ FEED Media Arts Center",
-        caption: "A student from Edinboro University enjoys the curated installation of Anisha Baid's work presented in conversation with 'TV Repairman'."
+        caption: "A student from Edinboro University enjoys the curated installation of Anisha Baid's work presented in conversation with 'TV Repairman'.",
+        width: 800,
+        height: 600
       },
       {
         src: "/feed-4.jpg",
         alt: "\"TV Repairman\" @ FEED Media Arts Center",
-        caption: "Here a community member teaches me about the benefits of using Tailwind CSS, which I go on to implement in the project."
+        caption: "Here a community member teaches me about the benefits of using Tailwind CSS, which I go on to implement in the project.",
+        width: 800,
+        height: 600
       },
       {
         src: "/feed-5.jpg",
         alt: "\"TV Repairman\" @ FEED Media Arts Center",
-        caption: "New friend and computer programmer Aashish teaches me about how to use a terminal properly."
+        caption: "New friend and computer programmer Aashish teaches me about how to use a terminal properly.",
+        width: 800,
+        height: 600
       },
       {
         src: "/feed-6.jpg",
         alt: "\"TV Repairman\" @ FEED Media Arts Center",
-        caption: "New friend and media specialist Brandon Lawrence and I talk Capitalism and art."
+        caption: "New friend and media specialist Brandon Lawrence and I talk Capitalism and art.",
+        width: 800,
+        height: 600
       }
     ]
   },
@@ -101,7 +111,9 @@ I did not complete the website in 30 days. In fact, I didn't get far. But that w
       {
         src: "/africanarts.png",
         alt: "KIGOMA Exhibition",
-        caption: "Exhibition at Erie African Arts"
+        caption: "Exhibition at Erie African Arts",
+        width: 800,
+        height: 600
       }
     ]
   },
@@ -122,7 +134,9 @@ I did not complete the website in 30 days. In fact, I didn't get far. But that w
       {
         src: "/logo.jpg",
         alt: "Ghost In the Machine Project",
-        caption: "Documenting urban renewal and artistic intervention"
+        caption: "Documenting urban renewal and artistic intervention",
+        width: 800,
+        height: 600
       }
     ]
   }
