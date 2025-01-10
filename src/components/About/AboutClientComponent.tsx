@@ -46,7 +46,7 @@ const AboutClientComponent = () => {
           >
             <div className="relative h-full rounded-2xl overflow-hidden shadow-2xl">
               <Image
-                src="/hero6.svg"
+                src="/hero6.jpg"
                 alt="Profile Picture"
                 fill
                 className="object-cover transform transition-transform duration-700 group-hover:scale-105"
@@ -100,7 +100,7 @@ const AboutClientComponent = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.7 }}
             >
-              {["Research","Literature", "Art","Photography","Technology"].map((tag) => (
+              {["Politics of Visuality and Race","Photography and Epistomologies of Vision", "Technology, Media, and Society","Post-Industrial Landscapes"].map((tag) => (
                 <span
                   key={tag}
                   className="px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"

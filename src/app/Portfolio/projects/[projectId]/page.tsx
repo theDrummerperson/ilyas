@@ -6,21 +6,32 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, MapPin, ArrowRight } from "lucide-react";
-import { projectsData } from "@/data/projectsData";
-import LightboxGallery from "@/components/LightboxGallery"; // Make sure to import LightboxGallery correctly
+import LightboxGallery from "@/components/LightboxGallery";
+import { projectsData } from "@/data/projects";
 
-const ProjectDetailPage = () => {
+const ProjectDetailPage: React.FC = () => {
   const params = useParams();
   const router = useRouter();
+  const [isLoading, setIsLoading] = React.useState(true);
   const projectId = params?.projectId as string;
 
   const project = projectsData[projectId as keyof typeof projectsData];
 
   React.useEffect(() => {
+    setIsLoading(true);
     if (!project) {
       router.push("/Portfolio/projects");
     }
+    setIsLoading(false);
   }, [project, router]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-red-600"></div>
+      </div>
+    );
+  }
 
   if (!project) {
     return null;
@@ -100,6 +111,16 @@ const ProjectDetailPage = () => {
 
       {/* Content Section */}
       <div className="max-w-4xl mx-auto px-6 py-20">
+        {/* Description */}
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="mb-12"
+        >
+          <p className="text-xl text-gray-600">{project.description}</p>
+        </motion.div>
+
         {/* Overview */}
         <motion.div
           initial={{ y: 20, opacity: 0 }}
@@ -150,48 +171,43 @@ const ProjectDetailPage = () => {
         </motion.div>
 
         {/* Gallery */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          className="mb-20"
-        >
-          <h2 className="text-4xl font-bold text-gray-900 mb-8">Project Gallery</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {project.gallery.map((image, index) => (
-              <motion.figure
-                key={index}
-                initial={{ scale: 0.95, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ delay: 0.7 + index * 0.1 }}
-                className="relative aspect-[4/3] group rounded-xl overflow-hidden"
-              >
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  fill
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <figcaption className="absolute bottom-0 left-0 right-0 p-6 text-white text-base translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  {image.caption}
-                </figcaption>
-              </motion.figure>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Lightbox Gallery */}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="mb-20"
-        >
-          <div className="w-full">
+        {project.gallery.length > 0 && (
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="mb-20"
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-8">Project Gallery</h2>
             <LightboxGallery images={project.gallery} />
-          </div>
-        </motion.div>
+          </motion.div>
+        )}
+
+        {/* Key Highlights (if available) */}
+        {project.keyHighlights && (
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="mb-20"
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-8">Key Highlights</h2>
+            <div className="grid gap-6">
+              {project.keyHighlights.map((highlight, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.8 + index * 0.1 }}
+                  className="bg-gray-50 p-6 rounded-xl border border-gray-100"
+                >
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{highlight.title}</h3>
+                  <p className="text-gray-600">{highlight.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
 
         {/* Navigation Footer */}
         <motion.div

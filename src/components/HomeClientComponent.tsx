@@ -30,7 +30,7 @@ export default function HomeClientComponent() {
             transition={{ duration: 0.8 }}
           >
             <Image
-              src="/hero5.svg"
+              src="/hero5.jpg"
               alt="Hero Image"
               fill
               priority
