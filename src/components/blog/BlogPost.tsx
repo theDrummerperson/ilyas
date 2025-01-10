@@ -1,6 +1,6 @@
 // src/components/blog/BlogPost.tsx
-"use client";
-import React from "react";
+'use client';
+import React from 'react';
 
 interface BlogPostProps {
   title: string;

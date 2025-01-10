@@ -1,5 +1,5 @@
-import { projectsData } from "@/data/projects";
-import ProjectDetailPage from "./ProjectDetailPage";
+import { projectsData } from '@/data/projects';
+import ProjectDetailPage from './ProjectDetailPage';
 
 export async function generateStaticParams() {
   return Object.keys(projectsData).map((projectId) => ({

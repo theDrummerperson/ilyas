@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React from "react";
-import { Instagram, Github, Linkedin, Mail } from "lucide-react";
+import React from 'react';
+import { Instagram, Github, Linkedin, Mail } from 'lucide-react';
 
 interface SocialLink {
   icon: typeof Instagram;
@@ -12,24 +12,24 @@ interface SocialLink {
 const socialLinks: SocialLink[] = [
   {
     icon: Instagram,
-    href: "https://www.instagram.com/smartugly_",
-    label: "Instagram"
+    href: 'https://www.instagram.com/smartugly_',
+    label: 'Instagram',
   },
   {
     icon: Github,
-    href: "https://github.com/theDrummerperson",
-    label: "GitHub"
+    href: 'https://github.com/theDrummerperson',
+    label: 'GitHub',
   },
   {
     icon: Linkedin,
-    href: "https://www.linkedin.com/in/ilyasabukar",
-    label: "LinkedIn"
+    href: 'https://www.linkedin.com/in/ilyasabukar',
+    label: 'LinkedIn',
   },
   {
     icon: Mail,
-    href: "mailto:iabukar@ilyasabukar.com",
-    label: "Email"
-  }
+    href: 'mailto:iabukar@ilyasabukar.com',
+    label: 'Email',
+  },
 ];
 
 export default function SocialLinks() {
@@ -41,13 +41,13 @@ export default function SocialLinks() {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-400 hover:text-red-600 transition-all duration-200
-            p-2 rounded-full hover:bg-gray-800
+          className="rounded-full p-2 text-gray-400 transition-all
+            duration-200 hover:bg-gray-800 hover:text-red-600
             focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50"
           aria-label={label}
           role="listitem"
         >
-          <Icon className="w-5 h-5" aria-hidden="true" />
+          <Icon className="h-5 w-5" aria-hidden="true" />
         </a>
       ))}
     </div>

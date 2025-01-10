@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { ArrowRight } from 'lucide-react';
 
 interface Project {
   id: string;
@@ -34,22 +34,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
 
       {/* Content */}
       <div className="relative p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
-        <p className="text-gray-600 mb-4 line-clamp-2">{project.description}</p>
-        
+        <h3 className="mb-2 text-xl font-bold text-gray-900">{project.title}</h3>
+        <p className="mb-4 line-clamp-2 text-gray-600">{project.description}</p>
+
         <div className="flex items-center justify-between">
           <div className="text-sm text-gray-500">
             <span>{project.duration}</span>
             <span className="mx-2">•</span>
             <span>{project.location}</span>
           </div>
-          
-          <Link 
+
+          <Link
             href={`/Portfolio/projects/${project.id}`}
-            className="group inline-flex items-center gap-2 text-red-600 hover:text-red-700 transition-colors"
+            className="group inline-flex items-center gap-2 text-red-600 transition-colors hover:text-red-700"
           >
             View Project
-            <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="h-4 w-4 transform transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </div>

@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useSearchParams } from "next/navigation";
+import React from 'react';
+import { useSearchParams } from 'next/navigation';
 
 const BlogPostPage = () => {
   const searchParams = useSearchParams();
-  const slug = searchParams ? searchParams.get("slug") : null;
+  const slug = searchParams ? searchParams.get('slug') : null;
 
   if (!slug) {
     return <div>Loading...</div>; // or handle the case where slug is not available

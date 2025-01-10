@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { LucideIcon } from "lucide-react";
+import React from 'react';
+import Link from 'next/link';
+import { LucideIcon } from 'lucide-react';
 
 interface FooterLink {
   href: string;
@@ -22,11 +22,14 @@ const FooterLinks = ({ links, showIcons }: FooterLinksProps) => {
         <Link
           key={link.label}
           href={link.href}
-          className="flex items-center group text-gray-400 hover:text-red-600 transition-all duration-200 hover:translate-x-1 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50 rounded-md p-1"
+          className="group flex items-center rounded-md p-1 text-gray-400 transition-all duration-200 hover:translate-x-1 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-opacity-50"
           role="listitem"
         >
           {showIcons && link.icon && (
-            <link.icon className="w-4 h-4 mr-2 transition-colors duration-200 group-hover:text-red-600" aria-hidden="true" />
+            <link.icon
+              className="mr-2 h-4 w-4 transition-colors duration-200 group-hover:text-red-600"
+              aria-hidden="true"
+            />
           )}
           {link.label}
         </Link>

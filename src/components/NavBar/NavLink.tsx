@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { ChevronDown } from "lucide-react";
-import type { NavLinkType } from "./types";
+import React from 'react';
+import Link from 'next/link';
+import { ChevronDown } from 'lucide-react';
+import type { NavLinkType } from './types';
 
 interface LinkItemProps {
   href: string;
@@ -14,8 +14,8 @@ interface LinkItemProps {
 const LinkItem: React.FC<LinkItemProps> = ({ href, label, isActive = false }) => (
   <Link
     href={href}
-    className={`text-gray-400 hover:text-red-600 transition-all duration-200 flex items-center group ${
-      isActive ? "text-red-600" : ""
+    className={`group flex items-center text-gray-400 transition-all duration-200 hover:text-red-600 ${
+      isActive ? 'text-red-600' : ''
     }`}
   >
     {label}
@@ -26,22 +26,17 @@ interface DropdownTriggerProps {
   label: string;
   isOpen: boolean;
   onToggle: () => void;
-  subLinks: NavLinkType["subLinks"]; // Use the type directly
+  subLinks: NavLinkType['subLinks']; // Use the type directly
 }
 
-const DropdownTrigger: React.FC<DropdownTriggerProps> = ({
-  label,
-  isOpen,
-  onToggle,
-  subLinks,
-}) => {
+const DropdownTrigger: React.FC<DropdownTriggerProps> = ({ label, isOpen, onToggle, subLinks }) => {
   const [isHovered, setIsHovered] = React.useState(false); // New state variable to track hover state
 
   return (
     <div className="relative">
       <button
-        className={`text-gray-400 hover:text-red-600 transition-all duration-200 flex items-center group ${
-          isOpen || isHovered ? "text-red-600" : "" // Apply hover style when hovered
+        className={`group flex items-center text-gray-400 transition-all duration-200 hover:text-red-600 ${
+          isOpen || isHovered ? 'text-red-600' : '' // Apply hover style when hovered
         }`}
         aria-expanded={isOpen}
         aria-haspopup="true"
@@ -51,29 +46,28 @@ const DropdownTrigger: React.FC<DropdownTriggerProps> = ({
       >
         {label}
         <ChevronDown
-          className={`ml-1 w-4 h-4 transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`ml-1 h-4 w-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
           aria-hidden="true"
         />
       </button>
-      {isOpen && subLinks && ( // Check if subLinks exist before mapping
-        <div
-          className="absolute left-0 mt-2 w-48 bg-black rounded-md shadow-lg transition-all duration-200 transform origin-top-left opacity-100 translate-y-0 scale-100"
-          role="menu"
-        >
-          {subLinks.map((subLink) => (
-            <Link
-              key={subLink.href}
-              href={subLink.href}
-              className="block p-4 text-gray-400 hover:bg-red-600 hover:text-white transition-all duration-200 first:rounded-t-md last:rounded-b-md"
-              role="menuitem"
-            >
-              {subLink.label}
-            </Link>
-          ))}
-        </div>
-      )}
+      {isOpen &&
+        subLinks && ( // Check if subLinks exist before mapping
+          <div
+            className="absolute left-0 mt-2 w-48 origin-top-left translate-y-0 scale-100 transform rounded-md bg-black opacity-100 shadow-lg transition-all duration-200"
+            role="menu"
+          >
+            {subLinks.map((subLink) => (
+              <Link
+                key={subLink.href}
+                href={subLink.href}
+                className="block p-4 text-gray-400 transition-all duration-200 first:rounded-t-md last:rounded-b-md hover:bg-red-600 hover:text-white"
+                role="menuitem"
+              >
+                {subLink.label}
+              </Link>
+            ))}
+          </div>
+        )}
     </div>
   );
 };

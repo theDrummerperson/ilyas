@@ -1,5 +1,5 @@
 // src/app/Portfolio/resume/page.tsx
-import React from "react";
+import React from 'react';
 
 const ResumePage = () => {
   return (

@@ -1,4 +1,4 @@
-type LogLevel = "debug" | "info" | "warn" | "error";
+type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 
 interface LogMessage {
   level: LogLevel;
@@ -9,21 +9,21 @@ interface LogMessage {
 
 export const logger = {
   debug: (message: string, context?: Record<string, unknown>) => {
-    logMessage("debug", message, context);
+    logMessage('debug', message, context);
   },
   info: (message: string, context?: Record<string, unknown>) => {
-    logMessage("info", message, context);
+    logMessage('info', message, context);
   },
   warn: (message: string, context?: Record<string, unknown>) => {
-    logMessage("warn", message, context);
+    logMessage('warn', message, context);
   },
   error: (message: string, context?: Record<string, unknown>) => {
-    logMessage("error", message, context);
-  }
+    logMessage('error', message, context);
+  },
 };
 
 function logMessage(level: LogLevel, message: string, context?: Record<string, unknown>) {
-  if (process.env.NODE_ENV === "production" && level === "debug") {
+  if (process.env.NODE_ENV === 'production' && level === 'debug') {
     return;
   }
 
@@ -31,20 +31,20 @@ function logMessage(level: LogLevel, message: string, context?: Record<string, u
     level,
     message,
     timestamp: new Date().toISOString(),
-    context
+    context,
   };
 
   switch (level) {
-    case "debug":
+    case 'debug':
       console.debug(JSON.stringify(logData));
       break;
-    case "info":
+    case 'info':
       console.info(JSON.stringify(logData));
       break;
-    case "warn":
+    case 'warn':
       console.warn(JSON.stringify(logData));
       break;
-    case "error":
+    case 'error':
       console.error(JSON.stringify(logData));
       break;
   }

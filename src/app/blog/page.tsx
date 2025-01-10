@@ -1,5 +1,5 @@
 // src/app/blog/page.tsx
-import React from "react";
+import React from 'react';
 
 const BlogPage = () => {
   return (

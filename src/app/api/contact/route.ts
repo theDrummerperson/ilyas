@@ -8,7 +8,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
     const { email, name, message } = body;
-    
+
     // Validate required fields
     if (!email || !name || !message) {
       return NextResponse.json(
@@ -29,29 +29,24 @@ export async function POST(req: Request) {
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Message:</strong></p>
           <p>${message}</p>
-        `
-      });
-      
-      return NextResponse.json({ 
-        success: true, 
-        message: 'Message sent successfully' 
+        `,
       });
 
+      return NextResponse.json({
+        success: true,
+        message: 'Message sent successfully',
+      });
     } catch (emailError: unknown) {
       console.error('Failed to send email:', emailError);
-      
+
       return NextResponse.json(
         { success: false, message: 'Failed to send message' },
         { status: 500 }
       );
     }
-
   } catch (error: unknown) {
     console.error('Contact form submission failed:', error);
-    
-    return NextResponse.json(
-      { success: false, message: 'Invalid request' },
-      { status: 400 }
-    );
+
+    return NextResponse.json({ success: false, message: 'Invalid request' }, { status: 400 });
   }
 }

@@ -2,6 +2,7 @@
   "name": "my-project",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -48,6 +49,7 @@
     "autoprefixer": "^10.4.20",
     "eslint": "^9.17.0",
     "eslint-config-next": "^15.1.4",
+    "eslint-define-config": "^2.1.0",
     "postcss": "^8.4.49",
     "postcss-import": "^16.0.0",
     "prettier": "^3.4.2",
