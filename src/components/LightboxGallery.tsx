@@ -1,74 +1,90 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Image from "next/image";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react"; // Icons for navigation and close button
+import dynamic from 'next/dynamic';
+import { X } from "lucide-react";
 
-interface LightboxGalleryProps {
-  images: {
-    src: string;
-    alt: string;
-    caption?: string;
-    width: number;
-    height: number;
-  }[];
-  className?: string; // Optional className prop
+// Dynamically import icons to reduce bundle size
+const ChevronLeft = dynamic(() => import('lucide-react').then(mod => mod.ChevronLeft));
+const ChevronRight = dynamic(() => import('lucide-react').then(mod => mod.ChevronRight));
+
+interface ImageType {
+  src: string;
+  alt: string;
+  caption?: string;
+  width: number;
+  height: number;
 }
 
-const LightboxGallery: React.FC<LightboxGalleryProps> = ({ images, className }) => {
+interface LightboxGalleryProps {
+  images: ImageType[];
+  className?: string;
+}
+
+const LightboxGallery: React.FC<LightboxGalleryProps> = React.memo(({ images, className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const openLightbox = (index: number) => {
+  const openLightbox = useCallback((index: number) => {
     setCurrentIndex(index);
     setIsOpen(true);
-  };
+  }, []);
 
-  const closeLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setIsOpen(false);
-  };
+  }, []);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
+  }, [images.length]);
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
-  };
+  }, [images.length]);
+
+  // Thumbnail component to reduce complexity
+  const Thumbnail = useCallback(({ image, index }: { image: ImageType; index: number }) => (
+    <div
+      className="relative group cursor-pointer"
+      onClick={() => openLightbox(index)}
+    >
+      <Image
+        src={image.src}
+        alt={image.alt}
+        width={image.width}
+        height={image.height}
+        className="object-cover w-full h-64 rounded-lg transition-transform duration-300 group-hover:scale-105"
+      />
+      {image.caption && (
+        <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <span className="text-white text-sm">{image.caption}</span>
+        </div>
+      )}
+    </div>
+  ), [openLightbox]);
 
   return (
     <div className={className}>
       {/* Thumbnail Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {images.map((image, index) => (
-          <div
-            key={index}
-            className="relative group cursor-pointer"
-            onClick={() => openLightbox(index)}
-          >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={image.width}
-              height={image.height}
-              className="object-cover w-full h-64 rounded-lg transition-transform duration-300 group-hover:scale-105"
-            />
-            {image.caption && (
-              <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <span className="text-white text-sm">{image.caption}</span>
-              </div>
-            )}
-          </div>
+          <Thumbnail key={index} image={image} index={index} />
         ))}
       </div>
 
       {/* Lightbox Dialog */}
-      <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="fixed inset-0 z-50" onClose={closeLightbox}>
+      <Transition show={isOpen} as={Fragment}>
+        <Dialog 
+          as="div" 
+          className="fixed inset-0 z-50" 
+          onClose={closeLightbox}
+          static
+        >
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
               as={Fragment}
@@ -85,6 +101,7 @@ const LightboxGallery: React.FC<LightboxGalleryProps> = ({ images, className }) 
             <span className="inline-block h-screen align-middle" aria-hidden="true">
               &#8203;
             </span>
+
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -110,6 +127,7 @@ const LightboxGallery: React.FC<LightboxGalleryProps> = ({ images, className }) 
                     width={images[currentIndex].width}
                     height={images[currentIndex].height}
                     className="object-contain w-full h-full"
+                    priority
                   />
                 </div>
 
@@ -142,6 +160,8 @@ const LightboxGallery: React.FC<LightboxGalleryProps> = ({ images, className }) 
       </Transition>
     </div>
   );
-};
+});
+
+LightboxGallery.displayName = 'LightboxGallery';
 
 export default LightboxGallery;
