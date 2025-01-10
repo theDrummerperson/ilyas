@@ -7,13 +7,15 @@ interface FormData {
   name: string;
   email: string;
   message: string;
+  subject?: string; // Added optional subject field
 }
 
 export function ContactForm() {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
-    message: ''
+    message: '',
+    subject: 'New Contact Form Message' // Default subject
   });
 
   const [status, setStatus] = useState({
@@ -24,11 +26,9 @@ export function ContactForm() {
 
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
-  // Character count for message
   const maxMessageLength = 500;
   const remainingChars = maxMessageLength - formData.message.length;
 
-  // Form completion percentage
   const calculateProgress = () => {
     const fields = [
       formData.name.length > 0,
@@ -56,7 +56,12 @@ export function ContactForm() {
       }
 
       setStatus({ loading: false, error: '', success: true });
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ 
+        name: '', 
+        email: '', 
+        message: '', 
+        subject: 'New Contact Form Message' 
+      });
 
       setTimeout(() => {
         setStatus(prev => ({ ...prev, success: false }));
