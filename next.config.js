@@ -2,19 +2,10 @@
 const nextConfig = {
   output: 'standalone',
   reactStrictMode: true,
-  // Optimization configurations
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['framer-motion', '@lucide-icons/react', '@headlessui/react'],
-    webpackBuildWorker: true,
+    // Remove webpackBuildWorker as it's causing issues
   },
-  compiler: {
-    // Remove console.logs in production
-    removeConsole: process.env.NODE_ENV === 'production',
-    // Enable minification
-    minify: true,
-  },
-  // Image optimization
   images: {
     remotePatterns: [
       {
@@ -22,31 +13,23 @@ const nextConfig = {
         hostname: 'ilyasabukar.com',
       },
     ],
-    // Enable image optimization
-    unoptimized: false,
   },
-  // Webpack optimizations
-  webpack: (config, { dev, isServer }) => {
-    // Production optimizations
-    if (!dev) {
+  // Move webpack config under proper structure
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
       config.optimization = {
         ...config.optimization,
-        moduleIds: 'deterministic',
         splitChunks: {
           chunks: 'all',
           minSize: 20000,
           maxSize: 70000,
-          cacheGroups: {
-            commons: {
-              test: /[\\/]node_modules[\\/]/,
-              name: 'vendors',
-              chunks: 'all',
-            },
-          },
         },
       };
     }
     return config;
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
   },
 };
 

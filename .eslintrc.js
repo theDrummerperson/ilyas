@@ -8,9 +8,9 @@ module.exports = {
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/recommended",
-    'next/core-web-vitals', // Move this to the end
+    "next/core-web-vitals",
   ],
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -23,10 +23,9 @@ module.exports = {
     "@typescript-eslint",
   ],
   rules: {
-    "quotes": ["error", "double"], 
+    "quotes": ["error", "single"],
     "react/react-in-jsx-scope": "off",
-    "@typescript-eslint/no-unused-vars": ['warn', { "argsIgnorePattern": "^_"}],
-    // other rules...
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
   },
   settings: {
     react: {
