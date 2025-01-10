@@ -1,23 +1,36 @@
-import { logger } from '@/lib/logger';
 import { NextResponse } from 'next/server';
+import { Resend } from 'resend';
+
+// Initialize Resend with your API key
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    const { email, name, message } = body;
     
-    logger.info('Processing contact form submission', { 
-      email: body.email 
-    });
+    // Validate required fields
+    if (!email || !name || !message) {
+      return NextResponse.json(
+        { success: false, message: 'Missing required fields' },
+        { status: 400 }
+      );
+    }
 
-    // Your email sending logic here
     try {
-      // Email sending attempt
-      logger.debug('Attempting to send email', {
-        to: process.env.CONTACT_EMAIL
+      // Send email using Resend
+      await resend.emails.send({
+        from: 'Your Website <onboarding@resend.dev>', // Update this
+        to: process.env.CONTACT_EMAIL as string,
+        subject: `New Contact Form Submission from ${name}`,
+        html: `
+          <h2>New Contact Form Submission</h2>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Message:</strong></p>
+          <p>${message}</p>
+        `
       });
-
-      // After successful email send
-      logger.info('Email sent successfully');
       
       return NextResponse.json({ 
         success: true, 
@@ -25,9 +38,7 @@ export async function POST(req: Request) {
       });
 
     } catch (emailError: unknown) {
-      logger.error('Failed to send email', {
-        error: emailError instanceof Error ? emailError.message : 'Unknown error'
-      });
+      console.error('Failed to send email:', emailError);
       
       return NextResponse.json(
         { success: false, message: 'Failed to send message' },
@@ -36,9 +47,7 @@ export async function POST(req: Request) {
     }
 
   } catch (error: unknown) {
-    logger.error('Contact form submission failed', {
-      error: error instanceof Error ? error.message : 'Unknown error'
-    });
+    console.error('Contact form submission failed:', error);
     
     return NextResponse.json(
       { success: false, message: 'Invalid request' },
