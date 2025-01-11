@@ -144,7 +144,7 @@ export default function HomeClientComponent() {
             >
               <div className="group relative h-full w-full overflow-hidden rounded-2xl">
                 <Image
-                  src="/hero5.svg"
+                  src="/hero5.jpg"
                   alt="Hero Image"
                   fill
                   priority
