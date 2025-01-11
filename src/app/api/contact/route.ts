@@ -1,52 +1,58 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Initialize Resend with your API key
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
+  if (req.method !== 'POST') {
+    return NextResponse.json({ message: 'Method not allowed' }, { status: 405 });
+  }
+
   try {
     const body = await req.json();
-    const { email, name, message } = body;
+    const { email, name, message, subject } = body;
 
-    // Validate required fields
+    // Validate the required fields
     if (!email || !name || !message) {
       return NextResponse.json(
-        { success: false, message: 'Missing required fields' },
+        { error: 'Missing required fields' },
         { status: 400 }
       );
     }
 
     try {
       // Send email using Resend
-      await resend.emails.send({
-        from: 'Your Website <onboarding@resend.dev>', // Update this
-        to: process.env.CONTACT_EMAIL as string,
-        subject: `New Contact Form Submission from ${name}`,
+      const data = await resend.emails.send({
+        from: 'Acme <onboarding@resend.dev>', // Update this with your verified domain
+        to: ['ilyasabukar@gmail.com'], // Your email address
+        subject: subject || `New message from ${name}`,
         html: `
-          <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <p>${message}</p>
+          <div>
+            <h2>New Contact Form Submission</h2>
+            <p><strong>From:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Message:</strong></p>
+            <div>${message}</div>
+          </div>
         `,
       });
 
-      return NextResponse.json({
-        success: true,
-        message: 'Message sent successfully',
-      });
-    } catch (emailError: unknown) {
-      console.error('Failed to send email:', emailError);
-
       return NextResponse.json(
-        { success: false, message: 'Failed to send message' },
+        { message: 'Email sent successfully', data },
+        { status: 200 }
+      );
+    } catch (error) {
+      console.error('Error sending email:', error);
+      return NextResponse.json(
+        { error: 'Error sending email' },
         { status: 500 }
       );
     }
-  } catch (error: unknown) {
-    console.error('Contact form submission failed:', error);
-
-    return NextResponse.json({ success: false, message: 'Invalid request' }, { status: 400 });
+  } catch (error) {
+    console.error('Error processing request:', error);
+    return NextResponse.json(
+      { error: 'Error processing request' },
+      { status: 400 }
+    );
   }
 }
