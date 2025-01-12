@@ -241,14 +241,6 @@ export const projectsData: ProjectsDataType = {
       },
 
 
-      {
-        src: "/kig-12.jpg",
-        alt: "KIGOMA event highlights",
-        caption: "Multicultural art night at Erie African Arts.",
-        width: 800,
-        height: 600,
-        credit: "© TheBrand Media Productions",
-      },
 
 
       {
@@ -324,6 +316,15 @@ export const projectsData: ProjectsDataType = {
         credit: "© TheBrand Media Productions",
       },
 
+
+      {
+        src: "/kig-21.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
 
 
 

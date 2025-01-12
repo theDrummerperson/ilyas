@@ -16,6 +16,50 @@ const PhotographyPage = () => {
       story: 'A portrait capturing disconnection.',
       category: 'Faces',
     },
+
+
+    {
+      src: '/protest.jpg',
+      alt: 'Protest in Bosotn, MA',
+      location: 'Boston/Cambridge, MA',
+      dateTaken: '2017',
+      camera: 'Sony A7',
+      story: 'Queer and Trans protest against Trump.',
+      category: 'Places',
+    },
+
+    {
+      src: '/syn.jpeg',
+      alt: 'Synthia Issah Portrait',
+      location: 'Boston, MA',
+      dateTaken: '2017',
+      camera: 'Canon EOS R5',
+      story: 'A portrait capturing possibility.',
+      category: 'Faces',
+    },
+
+
+    {
+      src: '/turin2.JPG',
+      alt: 'Italian street fashion',
+      location: 'Turin, Italy',
+      dateTaken: '2018',
+      camera: 'Sony A7',
+      story: 'An Italin couple out on a walk.',
+      category: 'Places',
+    },
+
+
+    {
+      src: '/sunray.jpg',
+      alt: 'Portrait of Lia, an artist',
+      location: 'Cambridge, MA',
+      dateTaken: '2017',
+      camera: 'Sony A7',
+      story: 'Lia Coleman taming the sun.',
+      category: 'Faces',
+    },
+
     {
       src: '/AA.jpeg',
       alt: 'Summertime Portrait',
@@ -25,15 +69,54 @@ const PhotographyPage = () => {
       story: 'Exploring guerrilla-style urban portraiture.',
       category: 'Faces',
     },
+
+
     {
-      src: '/azores.jpeg',
-      alt: 'Landscape of St. Miguel',
-      location: 'Azores, Portugal',
-      dateTaken: '2019',
-      camera: 'Canon EOS R5',
-      story: 'Capturing the natural beauty of the Azores islands.',
+      src: '/holland2.JPG',
+      alt: 'A Potrait of a Friend in Holland',
+      location: 'Rotterdam, Holland',
+      dateTaken: '2018',
+      camera: 'Sony A7',
+      story: 'A Portrait of a Woman By the Window.',
       category: 'Places',
     },
+
+
+    {
+      src: '/zores5.jpeg',
+      alt: 'Portuguese Landscape',
+      location: 'Portugal/St. Miguel Island',
+      dateTaken: '2018',
+      camera: 'Sony A7',
+      story: 'Exploring guerrilla-style landscape photography.',
+      category: 'Places',
+    },
+
+
+    {
+      src: '/artist.jpg',
+      alt: 'Graffitti Artist',
+      location: 'Wsahington, DC',
+      dateTaken: '2018',
+      camera: 'Sony A7',
+      story: 'Graffitti artist .',
+      category: 'Faces',
+    },
+
+
+
+    {
+      src: '/salaff.JPG',
+      alt: 'a smile in France',
+      location: 'Bordeaux, France',
+      dateTaken: '2018',
+      camera: 'Sony A7',
+      story: 'Capturing the natural beauty of a smile.',
+      category: 'Places',
+    },
+
+
+
     {
       src: '/Berlin.jpeg',
       alt: 'Berlin Street Scene',
@@ -45,13 +128,30 @@ const PhotographyPage = () => {
     },
     {
       src: '/BK.jpeg',
-      alt: 'Modern Cambodian Woman',
+      alt: 'Modern Gambian Woman',
       location: 'Cambridge, MA',
       dateTaken: '2016',
       camera: 'Canon EOS R5',
       story: 'Transient friendships.',
       category: 'Faces',
     },
+
+
+    {
+      src: '/streethead3.JPG',
+      alt: 'Wholesome night in Brussels',
+      location: 'Brussels, Belgium',
+      dateTaken: '2018',
+      camera: 'Canon EOS R5',
+      story: 'Love and passion.',
+      category: 'Place',
+    },
+
+
+
+
+
+
     {
       src: '/Boston.jpeg',
       alt: 'Dorchester, Boston',
@@ -80,7 +180,7 @@ const PhotographyPage = () => {
       category: 'Places',
     },
     {
-      src: '/EH.jpeg',
+      src: '/EH2.jpeg',
       alt: 'Portrait of Love Lost',
       location: 'Greenbelt, MD',
       dateTaken: '2018',
@@ -89,14 +189,38 @@ const PhotographyPage = () => {
       category: 'Faces',
     },
     {
-      src: '/EH2.jpeg',
-      alt: 'Portrait of Love Lost',
-      location: 'Washington, DC/Studio',
+      src: '/boston.JPG',
+      alt: 'Portrait of Men on Stilts',
+      location: 'Boston, MA',
       dateTaken: '2018',
       camera: 'Canon EOS R5',
-      story: 'The vibrant street life of Tolerance.',
-      category: 'Faces',
+      story: 'The vibrant street life of art.',
+      category: 'Places',
     },
+
+    {
+      src: '/erieboat.jpg',
+      alt: 'People on  boat',
+      location: 'Erie, Pa',
+      dateTaken: '2024',
+      camera: 'IPhone 11',
+      story: 'Nightime on the water in Erie PA.',
+      category: 'Places',
+    },
+
+
+
+    {
+      src: '/pedrocarina91.JPG',
+      alt: 'Portrait of Love Gained',
+      location: 'Portugal/St. Miguel Island',
+      dateTaken: '2018',
+      camera: 'Sony A7',
+      story: 'Carina and Pedro kiss.',
+      category: 'Places',
+    },
+
+
     {
       src: '/HyattsvilleMD.jpeg',
       alt: '',
@@ -142,6 +266,21 @@ const PhotographyPage = () => {
       story: 'Classical Parisian architecture and urban design.',
       category: 'Places',
     },
+
+
+    {
+      src: '/BK2.jpeg',
+      alt: 'A portrait of a friend',
+      location: 'Cambridge, MA',
+      dateTaken: '2018',
+      camera: 'Canon EOS R5',
+      story: 'A Gambian woman.',
+      category: 'Faces',
+    },
+
+
+
+    
     {
       src: '/self.jpeg',
       alt: 'Self Portrait in Berlin',
