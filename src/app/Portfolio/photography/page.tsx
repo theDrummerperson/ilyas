@@ -188,6 +188,18 @@ const PhotographyPage = () => {
       story: 'Documenting the spirit of self-destruction.',
       category: 'Faces',
     },
+
+
+    {
+      src: '/ladan.jpg',
+      alt: 'Portrait of Diasporic Connections',
+      location: 'Laurel, MD',
+      dateTaken: '2015',
+      camera: 'Canon EOS R5',
+      story: 'Documenting the spirit of joy.',
+      category: 'Faces',
+    },
+
     {
       src: '/boston.JPG',
       alt: 'Portrait of Men on Stilts',
