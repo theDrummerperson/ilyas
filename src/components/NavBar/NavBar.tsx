@@ -23,7 +23,7 @@ const NavBar = () => {
 
   const navLinks: NavLinkType[] = [
     { href: '/about', label: 'ABOUT' },
-    { href: '/blog', label: 'UPDATES' },
+    { href: '/updates', label: 'UPDATES' },
     {
       label: 'PORTFOLIO',
       isDropdown: true,
