@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
+import ProjectOverview from '@/components/Portfolio/ProjectOverview';
 
 interface Project {
   id: string;

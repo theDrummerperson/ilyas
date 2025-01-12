@@ -34,15 +34,17 @@ export const projectsData: ProjectsDataType = {
     location: 'FEED Media Arts, Erie, PA',
     headerImage: '/feed-header.jpg',
     description: 'Artist residency program exploring digital media and contemporary art practices.',
-    overview: `During my residency as the gift-shop artist-in-residence at FEED Media Arts, I explored the intersection of digital media, cultural storytelling, and community engagement. This unique platform allowed me to develop and showcase work that bridges traditional artistic practices with contemporary digital technologies.
-  
-  Believe it or not, the website you are engaging with right now is a handcrafted piece of African art, carved with code on a computer terminal and displayed on your screen. Yes, your computer screen is a canvas. This website is a product of my art installation, "TV Repairman," which ran from October 22, 2024, to November 22, 2024.
-  
-  For 30 days, I reported to the FEED Media gift shop, where I created a piece of handcrafted digital art in real-time. I relied on books, advice, and AI chatbots (Gemini, Mistral, ChatGPT, Claude) rather than formal computer science knowledge. Community members interacted with me, helping shape the language to describe my process in real-time.
-  
-  The purpose of this art project was to highlight a paradox: now more than ever, information on how to make our own tools (e.g., a website) is readily available and accessible for free or at a low cost. However, we often pay companies significant amounts to do work we could do ourselves. This project underscores the constraints placed on our time, attention, energy, and curiosity in late-stage capitalism.
-  
-  I did not complete the website in 30 days. In fact, I didn't get far. But that was ultimately the point. This website was completed one month after the delivery date, as I worked on it around the clock as a sort of day and night job.`,
+    overview: `
+    During my residency as the gift-shop artist-in-residence at FEED Media Arts, I explored the intersection of digital media, cultural storytelling, and community engagement. This unique platform allowed me to develop and showcase work that bridges traditional artistic practices with contemporary digital technologies.
+
+    Believe it or not, the website you are engaging with right now is a handcrafted piece of African art, carved with code on a computer terminal and displayed on your screen. Yes, your computer screen is a canvas. This website is a product of my art installation, "TV Repairman," which ran from October 22, 2024, to November 22, 2024.
+
+    For 30 days, I reported to the FEED Media gift shop, where I created a piece of handcrafted digital art in real-time. I relied on books, advice, and AI chatbots (Gemini, Mistral, ChatGPT, Claude) rather than formal computer science knowledge. Community members interacted with me, helping shape the language to describe my process in real-time.
+
+    The purpose of this art project was to highlight a paradox: now more than ever, information on how to make our own tools (e.g., a website) is readily available and accessible for free or at a low cost. However, we often pay companies significant amounts to do work we could do ourselves. This project underscores the constraints placed on our time, attention, energy, and curiosity in late-stage capitalism.
+
+    I did not complete the website in 30 days. In fact, I didn't get far. But that was ultimately the point. This website was completed one month after the delivery date, as I worked on it around the clock as a sort of day and night job.
+  `.trim(),
     objectives: [
       'Develop innovative digital media projects',
       'Engage with local communities through art',

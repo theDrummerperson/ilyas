@@ -1,6 +1,6 @@
 // src/app/layout.tsx
 import React from 'react';
-import './globals.css';
+import './globals.css'
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import RootLayoutClientComponent from '@/components/RootLayoutClientComponent';
