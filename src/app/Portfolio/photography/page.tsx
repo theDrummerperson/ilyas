@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import PhotographyCard from '../../../components/Portfolio/PhotographyCard';
+import { Metadata } from 'next';
+import { siteMetadata } from '@/app/metadata';
 
 const PhotographyPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
