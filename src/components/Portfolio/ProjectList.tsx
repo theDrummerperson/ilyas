@@ -1,6 +1,7 @@
 // src/components/Portfolio/ProjectList.tsx
 import React from 'react';
 import CustomCarousel from './CustomCarousel';
+import ProjectOverview from '@/components/Portfolio/ProjectOverview';
 
 const ProjectList = () => {
   return (

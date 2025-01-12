@@ -4,6 +4,13 @@ interface ProjectGalleryItem {
   caption: string;
   width: number;
   height: number;
+  credit?: string;
+}
+
+interface ProjectCredit {
+  name: string;
+  url: string;
+  role: string;
 }
 
 export interface Project {
@@ -21,6 +28,9 @@ export interface Project {
     title: string;
     description: string;
   }>;
+  credits?: {
+    photography?: ProjectCredit;
+  };
 }
 
 export interface ProjectsDataType {
@@ -28,14 +38,15 @@ export interface ProjectsDataType {
 }
 
 export const projectsData: ProjectsDataType = {
-  'feed-residency': {
-    title: 'Residency @ FEED Media Arts',
-    duration: '2024',
-    location: 'FEED Media Arts, Erie, PA',
-    headerImage: '/feed-header.jpg',
-    description: 'Artist residency program exploring digital media and contemporary art practices.',
+  "feed-residency": {
+    title: "Residency @ FEED Media Arts",
+    duration: "2024",
+    location: "FEED Media Arts, Erie, PA",
+    headerImage: "/feed-header.jpg",
+    description:
+      "Artist residency program exploring digital media and contemporary art practices.",
     overview: `
-    During my residency as the gift-shop artist-in-residence at FEED Media Arts, I explored the intersection of digital media, cultural storytelling, and community engagement. This unique platform allowed me to develop and showcase work that bridges traditional artistic practices with contemporary digital technologies.
+          During my residency as the gift-shop artist-in-residence at FEED Media Arts, I explored the intersection of digital media, cultural storytelling, and community engagement. This unique platform allowed me to develop and showcase work that bridges traditional artistic practices with contemporary digital technologies.
 
     Believe it or not, the website you are engaging with right now is a handcrafted piece of African art, carved with code on a computer terminal and displayed on your screen. Yes, your computer screen is a canvas. This website is a product of my art installation, "TV Repairman," which ran from October 22, 2024, to November 22, 2024.
 
@@ -44,29 +55,32 @@ export const projectsData: ProjectsDataType = {
     The purpose of this art project was to highlight a paradox: now more than ever, information on how to make our own tools (e.g., a website) is readily available and accessible for free or at a low cost. However, we often pay companies significant amounts to do work we could do ourselves. This project underscores the constraints placed on our time, attention, energy, and curiosity in late-stage capitalism.
 
     I did not complete the website in 30 days. In fact, I didn't get far. But that was ultimately the point. This website was completed one month after the delivery date, as I worked on it around the clock as a sort of day and night job.
-  `.trim(),
+    `.trim(),
     objectives: [
-      'Develop innovative digital media projects',
-      'Engage with local communities through art',
-      'Explore cultural narratives in digital spaces',
-      'Create immersive multimedia experiences',
+      "Develop innovative digital media projects",
+      "Engage with local communities through art",
+      "Explore cultural narratives in digital spaces",
+      "Create immersive multimedia experiences",
     ],
     gallery: [
       {
-        src: '/feed-1.jpg',
-        alt: '"TV Repairman" @ FEED Media Arts Center',
+        src: "/feed-1.jpg",
+        alt: "Community engagement at FEED Media Arts Center",
         caption:
-          'Community members engaging with the project through conversation about art and technology',
+          "Discussing art and technology with community members.",
         width: 800,
         height: 600,
       },
+
       {
         src: '/feed-2.jpg',
         alt: '"TV Repairman" @ FEED Media Arts Center',
-        caption: 'Here I am explaining to community members why a browser can be a canvas for art.',
+        caption: 'Here I am explaining to community members how a browser can be a canvas for art.',
         width: 800,
         height: 600,
       },
+
+
       {
         src: '/feed-3.jpg',
         alt: '"TV Repairman" @ FEED Media Arts Center',
@@ -75,14 +89,8 @@ export const projectsData: ProjectsDataType = {
         width: 800,
         height: 600,
       },
-      {
-        src: '/feed-4.jpg',
-        alt: '"TV Repairman" @ FEED Media Arts Center',
-        caption:
-          'Here a community member teaches me about the benefits of using Tailwind CSS, which I go on to implement in the project.',
-        width: 800,
-        height: 600,
-      },
+
+
       {
         src: '/feed-5.jpg',
         alt: '"TV Repairman" @ FEED Media Arts Center',
@@ -91,6 +99,7 @@ export const projectsData: ProjectsDataType = {
         width: 800,
         height: 600,
       },
+
       {
         src: '/feed-6.jpg',
         alt: '"TV Repairman" @ FEED Media Arts Center',
@@ -98,53 +107,264 @@ export const projectsData: ProjectsDataType = {
         width: 800,
         height: 600,
       },
-    ],
-  },
-  'kigoma-erie': {
-    title: 'KIGOMA @ Erie African Arts',
-    duration: '2024',
-    location: 'Erie African Arts',
-    headerImage: '/africanarts.png',
-    description:
-      'Cultural exhibition and artistic exploration of African heritage and contemporary expression.',
-    overview:
-      'KIGOMA is an exploration of African heritage through contemporary artistic expression, hosted at Erie African Arts. This exhibition bridges traditional African cultural elements with modern artistic practices.',
-    objectives: [
-      'Showcase contemporary African art',
-      'Connect traditional and modern artistic expressions',
-      'Create dialogue around cultural heritage',
-      'Engage with the Erie community',
-    ],
-    gallery: [
+
+
+
       {
-        src: '/africanarts.png',
-        alt: 'KIGOMA Exhibition',
-        caption: 'Exhibition at Erie African Arts',
+        src: "/feed-4.jpg",
+        alt: "Learning about Tailwind CSS",
+        caption:
+          "Community member teaching about Tailwind CSS implementation.",
         width: 800,
         height: 600,
       },
     ],
   },
-  'ghost-in-machine': {
-    title: 'Ghost In the Machine: Art and Urban Renewal in Northwest PA',
-    duration: '2025 (forthcoming)',
-    location: 'Northwest PA',
-    headerImage: '/logo.jpg',
+
+  "kigoma-erie": {
+    title: "KIGOMA @ Erie African Arts",
+    duration: "2024",
+    location: "Erie African Arts",
+    headerImage: "/kig-header2.JPG",
     description:
-      'A study documenting the role of the arts, local artists, and narratives of revitalization in Erie post-industrial life.',
-    overview:
-      'This upcoming project examines the intersection of art, urban renewal, and community development in Northwest Pennsylvania. Through documentation and analysis, it explores how artistic practices contribute to the revitalization of post-industrial spaces.',
+      "Cultural exhibition exploring African heritage and contemporary art.",
+    overview: `
+      KIGOMA highlighted Erie's multicultural presence through African music, 
+      food, dance, painting, fashion, and community engagement during a New Year's event.
+    `.trim(),
     objectives: [
-      'Document urban renewal through artistic lens',
-      'Analyze the impact of arts on community development',
-      'Capture stories of local artists and residents',
-      'Examine post-industrial transformation',
+      "Showcase contemporary African art",
+      "Connect traditional and modern artistic expressions",
+      "Create dialogue around cultural heritage",
+      "Engage with the Erie community",
     ],
     gallery: [
       {
-        src: '/logo.jpg',
-        alt: 'Ghost In the Machine Project',
-        caption: 'Documenting urban renewal and artistic intervention',
+        src: "/kig-1.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+      {
+        src: "/kig-2.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+      {
+        src: "/kig-4.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+
+      {
+        src: "/kig-7.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+      {
+        src: "/kig-8.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+
+      {
+        src: "/kig-9.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+      {
+        src: "/kig-10.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+      {
+        src: "/kig-11.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+      {
+        src: "/kig-12.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+
+      {
+        src: "/kig-13.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+      {
+        src: "/kig-12.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+      {
+        src: "/kig-14.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+      
+      
+      {
+        src: "/kig-15.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+      {
+        src: "/kig-16.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+
+      {
+        src: "/kig-17.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+      {
+        src: "/kig-18.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+
+
+      {
+        src: "/kig-19.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+
+      {
+        src: "/kig-20.jpg",
+        alt: "KIGOMA event highlights",
+        caption: "Multicultural art night at Erie African Arts.",
+        width: 800,
+        height: 600,
+        credit: "© TheBrand Media Productions",
+      },
+
+
+
+
+
+
+
+
+
+
+    ],
+    credits: {
+      photography: {
+        name: "TheBrand Media Productions",
+        url: "https://thebrandmedia.passgallery.com",
+        role: "Event Photography",
+      },
+    },
+  },
+
+  "ghost-in-machine": {
+    title: "Ghost In the Machine: Art and Urban Renewal in Northwest PA",
+    duration: "2025 (forthcoming)",
+    location: "Northwest PA",
+    headerImage: "/logo.jpg",
+    description:
+      "Documenting the role of arts and narratives in Erie's post-industrial renewal.",
+    overview: `
+      Exploring art's role in community development and the revitalization of 
+      post-industrial spaces in Northwest Pennsylvania.
+    `.trim(),
+    objectives: [
+      "Document urban renewal through artistic lens",
+      "Analyze the impact of arts on community development",
+      "Capture stories of local artists and residents",
+      "Examine post-industrial transformation",
+    ],
+    gallery: [
+      {
+        src: "/logo.jpg",
+        alt: "Urban renewal through art documentation",
+        caption: "Artistic intervention and transformation.",
         width: 800,
         height: 600,
       },
