@@ -62,7 +62,7 @@ const Carousel = ({ items }: CarouselProps) => {
 
   return (
     <div className="relative w-full max-w-4xl mx-auto overflow-hidden">
-      <div className="aspect-[16/9] relative">
+       <div className="aspect-[4/3] md:aspect-[16/9] relative">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentIndex}
@@ -91,7 +91,7 @@ const Carousel = ({ items }: CarouselProps) => {
             <div className="h-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
               <div className="flex flex-col md:flex-row gap-6 h-full">
                 <div className="w-full md:w-1/2 flex items-center justify-center bg-white rounded-lg p-4">
-                  <div className="relative w-64 h-64">
+                  <div className="relative w-full h-auto aspect-square max-w-[256px] min-h-[200px]">
                     <img
                       src={currentItem.image}
                       alt={currentItem.title}
@@ -99,23 +99,57 @@ const Carousel = ({ items }: CarouselProps) => {
                     />
                   </div>
                 </div>
-                <div className="w-full md:w-1/2 flex flex-col justify-center space-y-4">
+                <div className="w-full md:w-1/2 flex flex-col justify-center space-y-3 py-2">
                   <span className="text-sm font-medium text-blue-500">
                     {currentItem.category}
                   </span>
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white line-clamp-2">
                     {currentItem.title}
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                  <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
                     {currentItem.event}
                   </p>
-                  <div className="space-y-2 text-sm text-gray-500 dark:text-gray-400">
-                    <p>{currentItem.location}</p>
+                  <div className="space-y-1 text-sm text-gray-500 dark:text-gray-400">
+                    <p className="line-clamp-1">{currentItem.location}</p>
                     <p>{currentItem.date}</p>
                   </div>
                 </div>
               </div>
             </div>
+            <div className="flex flex-col md:flex-row gap-6 h-full">
+  <div className="w-full md:w-1/2 flex items-center justify-center bg-white rounded-lg p-4">
+    {/* Replace the fixed size container with a responsive one */}
+    <div className="relative w-full h-auto aspect-square max-w-[256px] min-h-[200px]">
+      <img
+        src={currentItem.image}
+        alt={currentItem.title}
+        className="w-full h-full object-contain"
+      />
+    </div>
+  </div>
+                
+  <div className="w-full md:w-1/2 flex flex-col justify-center space-y-3 py-2">
+    <span className="text-sm font-medium text-blue-500">
+      {currentItem.category}
+    </span>
+    <h3 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white line-clamp-2">
+      {currentItem.title}
+    </h3>
+    <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+      {currentItem.event}
+    </p>
+    <div className="space-y-1 text-sm text-gray-500 dark:text-gray-400">
+      <p className="line-clamp-1">{currentItem.location}</p>
+      <p>{currentItem.date}</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
           </motion.div>
         </AnimatePresence>
 
