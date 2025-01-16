@@ -1,4 +1,5 @@
 // src/app/about/page.tsx
+
 import React from 'react';
 import type { Metadata } from 'next';
 import { sharedMetadata, sharedViewport } from '@/config/metadata';
