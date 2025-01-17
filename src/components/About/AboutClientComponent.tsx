@@ -432,12 +432,7 @@ const AboutClientComponent = () => {
                       technology, and identity. Much of my time is spent examining Western ways of
                       seeing the body and the built environment in modern society.
                     </p>
-                    <p className="leading-relaxed">
-                      As a visual artist, I'm particularly interested in how humans use visual
-                      narratives—distinct from oral and written forms—to explore our
-                      perceptual blind spots and challenge the common assumption that seeing equals
-                      understanding.
-                    </p>
+                 
                   </div>
                 </div>
               </div>
