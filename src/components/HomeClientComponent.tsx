@@ -97,6 +97,9 @@ export default function HomeClientComponent() {
               </p>
 
               {/* Quote Section with enhanced mobile styling */}
+
+
+              
               <motion.div
                 className="relative mt-8 overflow-hidden rounded-lg bg-gray-100 p-6 text-center shadow-md dark:bg-gray-700"
                 initial={{ opacity: 0, y: 20 }}

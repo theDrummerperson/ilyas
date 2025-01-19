@@ -428,9 +428,7 @@ const AboutClientComponent = () => {
                   </div>
                   <div className="mt-6 space-y-4 text-gray-600 dark:text-gray-300">
                     <p className="leading-relaxed">
-                      I write and create experiences that explore the relationships between art,
-                      technology, and identity. Much of my time is spent examining Western ways of
-                      seeing the body and the built environment in modern society.
+                    Deeply curious about the intersections of aesthetics, politics, technology, and culture. This space is where I explore representation, mediation, and negation. Intrigued? Stay a while.
                     </p>
                   </div>
                 </div>
