@@ -11,6 +11,7 @@ import {
 import type { Conference } from './Carousel';
 import Carousel from './Carousel';
 
+
 interface Skill {
   icon: React.ForwardRefExoticComponent<any>;
   text: string;
@@ -395,7 +396,6 @@ const AboutClientComponent = () => {
         </motion.div>
       </motion.section>
 
-      {/* Main Content with Increased Spacing */}
        {/* Main Content with Updated Layout */}
        <div className="mx-auto max-w-6xl px-6 py-32">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
