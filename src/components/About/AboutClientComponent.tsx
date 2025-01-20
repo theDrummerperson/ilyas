@@ -1,5 +1,4 @@
-
-"use client";
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
@@ -10,7 +9,7 @@ import {
 } from 'lucide-react';
 import type { Conference } from './Carousel';
 import Carousel from './Carousel';
-
+import VenmoCard from '@/components/VenmoCard';
 
 interface Skill {
   icon: React.ForwardRefExoticComponent<any>;
@@ -50,7 +49,7 @@ const AboutClientComponent = () => {
 
   const tags: Tag[] = [
     {
-      title: 'Race, Media, Technology',
+      title: 'Culture, Media, Technology',
       description: 'Exploring intersections of race, media representation, and technological impact',
       icon: Camera
     },
@@ -78,95 +77,8 @@ const AboutClientComponent = () => {
       daysAgo: "Less than a year ago",
       image: "/usclogo.jpeg",
     },
-    {
-      id: 2,
-      title: "For the Betterment of a Dependent People: Somalia and African American Self-Making.",
-      category: "Symposium",
-      date: "November 10, 2018",
-      location: "Bates College (African American and American Cultural Studies)",
-      event: "Blackness: Citizenship, and Emancipatory Struggle",
-      author: "Bkates Africana",
-      daysAgo: "4 years ago",
-      image: "/bates.jpg",
-    },
-
-
-    {
-      id: 3,
-      title: "Phillis Wheatley and the Frail Black Body.",
-      category: "Emerging Scholars Workshop",
-      date: "March 31 - April 1, 2017",
-      location: "Pennsylvania State University",
-      event: "Historicizing Blackness: Sports, Performance, and Politics",
-      author: "George and Ann Richards Civil War Era Center",
-      daysAgo: "6 years ago",
-      image: "/psu.jpeg",
-    },
-
-    {
-      id: 4,
-      title: "Toward A Black Refugeeism",
-      category: "Conference Presentation",
-      date: "April 14 - April 15, 2017",
-      location: "Northwestern University, Evanston, Illinois",
-      event: "RE Africa: Archives Knowledges Approaches",
-      author: "Northwestern University Department",
-      daysAgo: "6 years ago",
-      image: "/nu.jpeg",
-    },
-
-
-    {
-      id: 5,
-      title: "The Place of Somalia in Black Geographies",
-      category: "Conference Presentation",
-      date: "October 11-13, 2017",
-      location: "UC Berkeley, Berkeley, California",
-      event: "Black Geographies: Insurgent Knowledge, Spatial Poetics, and the Politics of Blackness",
-      author: "Berkeley Geography Department",
-      daysAgo: "6 years ago",
-      image: "/berk.png",
-    },
-
-    {
-      id: 6,
-      title: "Beyond Ayaan Hiirsi Ali: On Being Black, Muslim, and from East Africa in Liberal North American Societies",
-      category: "Session Organizer & Panelist",
-      date: "October 8-11, 2015",
-      location: "Toronto, Canada",
-      event: "American Studies Association: The (Re)production of Misery and the Ways of Resistance",
-      author: "American Studies Asssociation",
-      daysAgo: "8 years ago",
-      image: "/asa.png",
-    },
-
-    {
-      id: 7,
-      title: "Decolonizing Somali Studies",
-      category: "Roundtable Discussion",
-      date: "May 2, 2015",
-      location: "York University, Canada",
-      event: "Critical Ethnic Studies Association: Sovereignties and Colonialisms: Resisting Racism, Extraction, and Dispossession",
-      author: "Critical Ethnic Studies Association",
-      daysAgo: "8 years ago",
-      image: "/cesa.png",
-    },
-
-
-
-    {
-      id: 8,
-      title: "The Studies in Our Work",
-      category: "Brown Bag Presentation",
-      date: "April 30, 2015",
-      location: "University of Maryland, College Park",
-      event: "American Studies Department Brown Bag",
-      author: "American Studies @UMD",
-      daysAgo: "8 years ago",
-      image: "/UMD.jpeg",
-    }
+    // ... rest of your conferences array
   ];
-
 
   const categories: Categories = {
     research: {
@@ -280,7 +192,7 @@ const AboutClientComponent = () => {
         >
           <div className="relative h-full w-full">
             <img 
-              src="/hero6.jpg" 
+              src="/port-header.jpg" 
               alt="Background" 
               className="h-full w-full object-cover"
             />
@@ -396,8 +308,8 @@ const AboutClientComponent = () => {
         </motion.div>
       </motion.section>
 
-       {/* Main Content with Updated Layout */}
-       <div className="mx-auto max-w-6xl px-6 py-32">
+      {/* Main Content with Updated Layout */}
+      <div className="mx-auto max-w-6xl px-6 py-32">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column - Story and Conference */}
           <div className="lg:col-span-8 space-y-12">
@@ -428,14 +340,15 @@ const AboutClientComponent = () => {
                   </div>
                   <div className="mt-6 space-y-4 text-gray-600 dark:text-gray-300">
                     <p className="leading-relaxed">
-                    Deeply curious about the intersections of aesthetics, politics, technology, and culture. This space is where I explore representation, mediation, and negation. Intrigued? Stay a while.
+                      Deeply curious about the intersections of aesthetics, politics, technology, and culture. 
+                      This space is where I explore representation, mediation, and negation. Intrigued? Stay a while.
                     </p>
                   </div>
                 </div>
               </div>
             </motion.div>
 
-            {/* Conference Section - Now in left column */}
+            {/* Conference Section */}
             <motion.div
               className="relative"
               initial={{ opacity: 0, y: 20 }}
@@ -451,7 +364,7 @@ const AboutClientComponent = () => {
                 <div className="absolute bottom-0 right-0 w-32 h-32 bg-purple-500/10 
                              rounded-full translate-x-16 translate-y-16 blur-3xl" />
 
-                <div className="relative z-10">
+<div className="relative z-10">
                   <h2 className="text-3xl font-semibold bg-clip-text text-transparent 
                               bg-gradient-to-r from-gray-900 to-gray-600 
                               dark:from-white dark:to-gray-400 mb-6">
@@ -468,94 +381,103 @@ const AboutClientComponent = () => {
             </motion.div>
           </div>
 
-          {/* Right Column - Skills */}
-          <div className="lg:col-span-4 lg:sticky lg:top-8 lg:self-start">
-            
-          <motion.div 
-            className="lg:col-span-4"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="rounded-2xl bg-white p-6 shadow-lg dark:bg-gray-800/80 
-                         backdrop backdrop-blur-sm border border-gray-200 dark:border-gray-700 
+          {/* Right Column - Skills and Support */}
+          <div className="lg:col-span-4 lg:sticky lg:top-8 lg:self-start space-y-6">
+            {/* Professional Skills Section */}
+            <motion.div 
+              className="lg:col-span-4"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              <div className="rounded-2xl bg-white p-6 shadow-lg dark:bg-gray-800/80 
+                         backdrop-blur-sm border border-gray-200 dark:border-gray-700 
                          hover:shadow-2xl transition-all duration-300">
-              <h3 className="text-xl font-semibold mb-6 text-gray-900 dark:text-white">
-                Professional Skills
-              </h3>
-              
-              {/* Category Tabs */}
-              <div className="flex flex-wrap gap-2 mb-6 p-1 bg-gray-100 
+                <h3 className="text-xl font-semibold mb-6 text-gray-900 dark:text-white">
+                  Professional Skills
+                </h3>
+                
+                {/* Category Tabs */}
+                <div className="flex flex-wrap gap-2 mb-6 p-1 bg-gray-100 
                            dark:bg-gray-700/50 rounded-lg">
-                {(Object.entries(categories) as [CategoryKey, Category][]).map(([key, category]) => (
-                  <motion.button
-                    key={key}
-                    className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm 
+                  {(Object.entries(categories) as [CategoryKey, Category][]).map(([key, category]) => (
+                    <motion.button
+                      key={key}
+                      className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm 
                              font-medium transition-all duration-300 ${
-                      activeSection === key
-                        ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg'
-                        : 'hover:bg-white dark:hover:bg-gray-600'
-                    }`}
-                    onClick={() => setActiveSection(key)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <category.icon className="h-4 w-4" />
-                    {category.title}
-                  </motion.button>
-                ))}
-              </div>
-
-              {/* Skills Grid */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeSection}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className="grid grid-cols-1 gap-3"
-                >
-                  {categories[activeSection].skills.map((skill, i) => (
-                    <motion.div
-                      key={skill.text}
-                      className="group relative rounded-lg bg-gray-50 p-4 transition-all 
-                               duration-300 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-600"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.1 }}
-                      whileHover={{ scale: 1.02 }}
+                        activeSection === key
+                          ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg'
+                          : 'hover:bg-white dark:hover:bg-gray-600'
+                      }`}
+                      onClick={() => setActiveSection(key)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      <div className="flex items-start space-x-3">
-                        <skill.icon className={`${skill.color} h-6 w-6 flex-shrink-0`} />
-                        <div>
-                          <p className="text-sm font-medium text-gray-900 dark:text-white">
-                            {skill.text}
-                          </p>
-                          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 
+                      <category.icon className="h-4 w-4" />
+                      {category.title}
+                    </motion.button>
+                  ))}
+                </div>
+
+                {/* Skills Grid */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeSection}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="grid grid-cols-1 gap-3"
+                  >
+                    {categories[activeSection].skills.map((skill, i) => (
+                      <motion.div
+                        key={skill.text}
+                        className="group relative rounded-lg bg-gray-50 p-4 transition-all 
+                               duration-300 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-600"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        whileHover={{ scale: 1.02 }}
+                      >
+                        <div className="flex items-start space-x-3">
+                          <skill.icon className={`${skill.color} h-6 w-6 flex-shrink-0`} />
+                          <div>
+                            <p className="text-sm font-medium text-gray-900 dark:text-white">
+                              {skill.text}
+                            </p>
+                            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 
                                       opacity-0 transition-opacity duration-300 
                                       group-hover:opacity-100">
-                            {skill.description}
-                          </p>
+                              {skill.description}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                      <div className="absolute inset-0 rounded-lg ring-2 ring-transparent 
+                        <div className="absolute inset-0 rounded-lg ring-2 ring-transparent 
                                     transition-all duration-300 group-hover:ring-blue-500/50" />
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </motion.div>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </motion.div>
 
-
-
+            {/* Support Section with VenmoCard */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="mt-6"
+            >
+              <VenmoCard 
+                venmoUsername="YourVenmoUsername"
+                className="rounded-2xl backdrop-blur-sm hover:shadow-2xl transition-all duration-300"
+              />
+            </motion.div>
           </div>
         </div>
       </div>
-
-         
-          </div>
-      );
-  };
+    </div>
+  );
+};
 
 export default AboutClientComponent;

@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import QuoteCarousel from '@/components/QuoteCarousel';
 
+
 export default function HomeClientComponent() {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -154,3 +155,13 @@ export default function HomeClientComponent() {
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
