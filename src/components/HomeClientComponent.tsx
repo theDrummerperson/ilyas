@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import QuoteCarousel from '@/components/QuoteCarousel';
 
 export default function HomeClientComponent() {
   const [isMobile, setIsMobile] = useState(false);
@@ -96,26 +97,8 @@ export default function HomeClientComponent() {
                 Based in Erie, PA
               </p>
 
-              {/* Quote Section with enhanced mobile styling */}
-
-
-              
-              <motion.div
-                className="relative mt-8 overflow-hidden rounded-lg bg-gray-100 p-6 text-center shadow-md dark:bg-gray-700"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.8 }}
-              >
-                <div className="absolute left-0 top-0 h-full w-2 bg-gradient-to-b from-red-600 to-red-400" />
-                <p className="text-lg italic text-gray-800 dark:text-gray-200 lg:text-xl">
-                  &ldquo;Love itself, the subversive gift, is an important public good, and loving
-                  is a significant political act, particularly among those stigmatized and marked as
-                  unworthy of love and incapable of deep commitment.&rdquo;
-                </p>
-                <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-                  - Richard Iton, <em>In Search of the Black Fantastic</em>
-                </p>
-              </motion.div>
+              {/* Quote Carousel */}
+              <QuoteCarousel />
 
               <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
                 <motion.a
