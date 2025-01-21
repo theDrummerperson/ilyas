@@ -3,7 +3,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import HeroSection from '@/components/resume/HeroSection';
 import ContactInfo from '@/components/resume/ContactInfo';
-import SkillsSection from '@/components/resume/SkillsSection';
+import SkillsSection from '@/components/resume/SkillsSection'; 
 import ExperienceSection from '@/components/resume/ExperienceSection';
 import EducationSection from '@/components/resume/EducationSection';
 import ArtworkSection from '@/components/resume/ArtworkSection';

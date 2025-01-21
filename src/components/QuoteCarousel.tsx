@@ -1,10 +1,9 @@
-// src/components/QuoteCarousel.tsx //
 'use client';
 
 
+
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Quote as QuoteIcon, Pause, Play } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface Quote {
   text: string;
@@ -32,16 +31,12 @@ const quotes: Quote[] = [
 
 const QuoteCarousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [direction, setDirection] = useState<number>(0);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    if (!isAutoPlaying) return;
-    
+    const duration = 5000; // 5 seconds per quote
     let startTime = Date.now();
-    const duration = 5000;
-
+    
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;
       const newProgress = (elapsed / duration) * 100;
@@ -53,168 +48,64 @@ const QuoteCarousel: React.FC = () => {
     };
 
     const timer = setInterval(() => {
-      setDirection(1);
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % quotes.length);
+      setCurrentIndex((prev) => (prev + 1) % quotes.length);
       startTime = Date.now();
       setProgress(0);
     }, duration);
 
     updateProgress();
-    return () => {
-      clearInterval(timer);
-    };
-  }, [isAutoPlaying]);
-
-  const slideVariants: Variants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 500 : -500,
-      opacity: 0,
-      scale: 0.9
-    }),
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-      scale: 1
-    },
-    exit: (direction: number) => ({
-      zIndex: 0,
-      x: direction < 0 ? 500 : -500,
-      opacity: 0,
-      scale: 0.9
-    })
-  };
-
-  const handleNext = () => {
-    setIsAutoPlaying(false);
-    setDirection(1);
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % quotes.length);
-  };
-
-  const handlePrevious = () => {
-    setIsAutoPlaying(false);
-    setDirection(-1);
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + quotes.length) % quotes.length);
-  };
-
-  const toggleAutoPlay = () => {
-    setIsAutoPlaying(!isAutoPlaying);
-    setProgress(0);
-  };
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div className="relative mt-8 h-80 sm:h-72 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-gray-100 via-white to-gray-50 p-4 sm:p-8 shadow-xl dark:from-gray-800 dark:via-gray-800 dark:to-gray-700">
-      {/* Decorative elements */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
-      <div className="absolute left-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-red-500/20 to-transparent" />
-      <div className="absolute right-0 top-0 h-full w-px bg-gradient-to-b from-transparent via-red-500/20 to-transparent" />
-      
-      {/* Quote icon with enhanced styling */}
-      <div className="absolute left-6 top-6 rounded-full bg-red-500/10 p-2">
-        <QuoteIcon className="h-6 w-6 text-red-500/50" />
-      </div>
-      
-      <div className="relative h-full w-full">
-        <AnimatePresence initial={false} custom={direction}>
-          <motion.div
-            key={currentIndex}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.3 },
-              scale: { duration: 0.3 }
-            }}
-            className="absolute inset-0 flex flex-col items-center justify-center px-2 sm:px-6"
-          >
-            <p className="mb-4 sm:mb-6 text-center text-base sm:text-lg italic leading-relaxed text-gray-800 dark:text-gray-200 lg:text-xl">
-              &ldquo;{quotes[currentIndex].text}&rdquo;
+    <div className="relative mt-8 w-full overflow-hidden rounded-2xl bg-white/50 p-8 shadow-sm dark:bg-gray-900/50">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.5 }}
+          className="relative"
+        >
+          <div className="space-y-6">
+            <p className="text-center text-base leading-relaxed tracking-wide text-gray-800 dark:text-gray-200">
+              "{quotes[currentIndex].text}"
             </p>
             <div className="text-center">
-              <p className="text-xs sm:text-sm font-medium text-gray-900 dark:text-gray-100">
+              <p className="font-medium text-gray-900 dark:text-gray-100">
                 {quotes[currentIndex].author}
               </p>
-              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                <em>{quotes[currentIndex].source}</em>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                {quotes[currentIndex].source}
               </p>
             </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
 
-      {/* Progress bar */}
-      {isAutoPlaying && (
-        <div className="absolute bottom-0 left-0 h-0.5 w-full bg-gray-200 dark:bg-gray-600">
-          <motion.div
-            className="h-full bg-red-500"
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.1, ease: "linear" }}
-          />
-        </div>
-      )}
-
-      {/* Navigation dots with enhanced styling */}
-      <div className="absolute bottom-6 left-0 right-0 flex justify-center space-x-2">
+      {/* Progress dots */}
+      <div className="mt-6 flex justify-center space-x-2">
         {quotes.map((_, index) => (
-          <motion.button
+          <div
             key={index}
-            onClick={() => {
-              setIsAutoPlaying(false);
-              setDirection(index > currentIndex ? 1 : -1);
-              setCurrentIndex(index);
-            }}
-            className={`h-2 rounded-full transition-all ${
-              index === currentIndex
-                ? 'w-8 bg-red-500'
-                : 'w-2 bg-gray-300 dark:bg-gray-600 hover:bg-red-300'
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              index === currentIndex 
+                ? 'w-8 bg-red-500' 
+                : 'w-1.5 bg-gray-300 dark:bg-gray-600'
             }`}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
-            aria-label={`Go to quote ${index + 1}`}
           />
         ))}
       </div>
 
-      {/* Navigation buttons with enhanced styling */}
-      <div className="absolute right-6 top-6 flex space-x-2">
-        <motion.button
-          onClick={toggleAutoPlay}
-          className="rounded-full bg-white/80 p-2 text-gray-800 shadow-lg backdrop-blur-sm transition-colors hover:bg-white dark:bg-gray-800/80 dark:text-gray-200 dark:hover:bg-gray-800"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          aria-label={isAutoPlaying ? "Pause autoplay" : "Start autoplay"}
-        >
-          {isAutoPlaying ? (
-            <Pause className="h-4 w-4" />
-          ) : (
-            <Play className="h-4 w-4" />
-          )}
-        </motion.button>
+      {/* Progress bar */}
+      <div className="absolute bottom-0 left-0 h-0.5 w-full bg-gray-100 dark:bg-gray-800">
+        <motion.div
+          className="h-full bg-red-500"
+          animate={{ width: `${progress}%` }}
+          transition={{ duration: 0.1, ease: "linear" }}
+        />
       </div>
-
-      <motion.button
-        onClick={handlePrevious}
-        className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/80 p-3 text-gray-800 shadow-lg backdrop-blur-sm transition-colors hover:bg-white dark:bg-gray-800/80 dark:text-gray-200 dark:hover:bg-gray-800"
-        whileHover={{ scale: 1.1, x: -4 }}
-        whileTap={{ scale: 0.9 }}
-        aria-label="Previous quote"
-      >
-        <ChevronLeft className="h-5 w-5" />
-      </motion.button>
-
-      <motion.button
-        onClick={handleNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/80 p-3 text-gray-800 shadow-lg backdrop-blur-sm transition-colors hover:bg-white dark:bg-gray-800/80 dark:text-gray-200 dark:hover:bg-gray-800"
-        whileHover={{ scale: 1.1, x: 4 }}
-        whileTap={{ scale: 0.9 }}
-        aria-label="Next quote"
-      >
-        <ChevronRight className="h-5 w-5" />
-      </motion.button>
     </div>
   );
 };

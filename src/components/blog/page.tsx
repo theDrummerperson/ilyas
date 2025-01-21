@@ -5,6 +5,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import BlogList from '@/components/blog/BlogList';
 
+
 interface Post {
   title: string;
   date: string;
