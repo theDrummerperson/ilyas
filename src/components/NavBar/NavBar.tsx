@@ -22,8 +22,16 @@ const NavBar = () => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   const navLinks: NavLinkType[] = [
-    { href: '/about', label: 'ABOUT' },
-    { href: '/updates', label: 'UPDATES' },
+    {
+      label: 'ABOUT',
+      isDropdown: true,
+      subLinks: [
+        { href: '/about', label: 'ABOUT' },
+        { href: '/updates', label: 'UPDATES' },
+        { href: '/resume', label: 'RESUME' },
+        { href: '/contact', label: 'CONTACT' },
+      ],
+    },
     {
       label: 'PORTFOLIO',
       isDropdown: true,
@@ -33,8 +41,6 @@ const NavBar = () => {
         { href: '/Portfolio/photography', label: 'PHOTOGRAPHY' },
       ],
     },
-    { href: '/resume', label: 'RESUME' },
-    { href: '/contact', label: 'CONTACT' },
   ];
 
   useEffect(() => {

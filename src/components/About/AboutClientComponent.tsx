@@ -3,32 +3,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import {
-  Code, Camera, Pen, Coffee, Library, Globe, 
-  ChevronDown, Share2, BookMarked, ExternalLink,
-  Briefcase, GraduationCap, Award
+  Camera, 
+  Library, 
+  Globe, 
+  ChevronDown,
+  GraduationCap, 
+  Award
 } from 'lucide-react';
 import type { Conference } from './Carousel';
 import Carousel from './Carousel';
 import VenmoCard from '@/components/VenmoCard';
-
-interface Skill {
-  icon: React.ForwardRefExoticComponent<any>;
-  text: string;
-  color: string;
-  description: string;
-}
-
-interface Category {
-  icon: React.ForwardRefExoticComponent<any>;
-  title: string;
-  skills: Skill[];
-}
-
-type Categories = {
-  [key in 'research' | 'management' | 'communication' | 'technical']: Category;
-};
-
-type CategoryKey = keyof Categories;
+import SkillsSection from '@/components/resume/SkillsSection';
 
 interface Tag {
   title: string;
@@ -40,7 +25,6 @@ const AboutClientComponent = () => {
   const { scrollY, scrollYProgress } = useScroll();
   const heroImageY = useTransform(scrollY, [0, 500], [0, 100]);
   const [activeTag, setActiveTag] = useState<string | null>(null);
-  const [activeSection, setActiveSection] = useState<CategoryKey>('research');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -77,95 +61,55 @@ const AboutClientComponent = () => {
       daysAgo: "Less than a year ago",
       image: "/usclogo.jpeg",
     },
-    // ... rest of your conferences array
+    // Add more conferences here
   ];
 
-  const categories: Categories = {
-    research: {
-      icon: Library,
-      title: 'Research',
+
+  const skillCategories = [
+    {
+      title: 'Research & Analysis',
       skills: [
-        { 
-          icon: Library,
-          text: 'Research Methodologies',
-          color: 'text-blue-600',
-          description: 'Qualitative research expertise'
-        },
-        { 
-          icon: Code,
-          text: 'Data Analysis',
-          color: 'text-green-600',
-          description: 'Analysis and visualization'
-        },
-        { 
-          icon: Code,
-          text: 'Database Management',
-          color: 'text-cyan-600',
-          description: 'Data organization systems'
-        }
+        'Race and Immigration Studies',
+        'Digital Media Studies',
+        'Cultural Analysis',
+        'Ethnographic Research',
+        'American Studies',
+        'Media Ecology'
       ]
     },
-    management: {
-      icon: Briefcase,
-      title: 'Management',
+    {
+      title: 'Teaching & Leadership',
       skills: [
-        { 
-          icon: BookMarked,
-          text: 'Project Management',
-          color: 'text-purple-600',
-          description: 'Project planning and execution'
-        },
-        { 
-          icon: Share2,
-          text: 'Cross-functional Collaboration',
-          color: 'text-yellow-600',
-          description: 'Team coordination'
-        }
+        'Curriculum Development',
+        'Multi-campus Teaching',
+        'Research Presentation',
+        'Conference Organization',
+        'Strategic Planning',
+        'Student Engagement'
       ]
     },
-    communication: {
-      icon: Pen,
-      title: 'Communication',
+    {
+      title: 'Technical & Creative',
       skills: [
-        { 
-          icon: Pen,
-          text: 'Communication',
-          color: 'text-indigo-600',
-          description: 'Presentation and writing'
-        },
-        {
-          icon: Globe,
-          text: 'Cultural Sensitivity',
-          color: 'text-red-600',
-          description: 'Empathy and awareness'
-        },
-        {
-          icon: ExternalLink,
-          text: 'Policy Advocacy',
-          color: 'text-orange-600',
-          description: 'Policy development'
-        }
-      ]
-    },
-    technical: {
-      icon: Camera,
-      title: 'Technical',
-      skills: [
-        {
-          icon: Camera,
-          text: 'Technology Proficiency',
-          color: 'text-violet-600',
-          description: 'Modern platforms expertise'
-        }
+        'Multimedia Installation',
+        'Digital Content Creation',
+        'Technology-Enhanced Learning',
+        'Media Production',
+        'Database Management',
+        'Contemporary Art Practice'
       ]
     }
-  };
+  ];
+
+
+
+
 
   if (!mounted) return null;
 
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      {/* Scroll Progress Indicator */}
+      {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 origin-left z-50"
         style={{ scaleX: scrollYProgress }}
@@ -179,13 +123,15 @@ const AboutClientComponent = () => {
         transition={{ duration: 0.7 }}
       >
         {/* Pattern Overlay */}
-        <div className="absolute inset-0 bg-black/20 z-[1]" 
+        <div 
+          className="absolute inset-0 bg-black/20 z-[1]" 
           style={{ 
             backgroundImage: 'url("data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%239C92AC" fill-opacity="0.05"%3E%3Cpath d="M0 0h20L0 20z"/%3E%3C/g%3E%3C/svg%3E")',
             backgroundRepeat: 'repeat'
           }}
         />
 
+        {/* Background Image */}
         <motion.div 
           className="absolute inset-0 z-0" 
           style={{ y: heroImageY }}
@@ -204,7 +150,7 @@ const AboutClientComponent = () => {
         <div className="relative z-10 flex h-full items-center px-6">
           <motion.div 
             className="mx-auto max-w-4xl rounded-2xl bg-white/10 p-8 backdrop-blur-md border border-white/10
-                       hover:bg-white/15 transition-all duration-300"
+                     hover:bg-white/15 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -251,8 +197,8 @@ const AboutClientComponent = () => {
                 <div key={tag.title} className="relative group">
                   <motion.button
                     className="rounded-full bg-white/20 px-4 py-2 text-sm text-white 
-                             transition-all duration-300 hover:bg-white/30 border border-white/10 
-                             group-hover:ring-2 ring-white/30 flex items-center gap-2"
+                           transition-all duration-300 hover:bg-white/30 border border-white/10 
+                           group-hover:ring-2 ring-white/30 flex items-center gap-2"
                     onMouseEnter={() => setActiveTag(tag.title)}
                     onMouseLeave={() => setActiveTag(null)}
                     whileHover={{ scale: 1.05 }}
@@ -270,7 +216,7 @@ const AboutClientComponent = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
                         className="absolute top-full mt-2 w-64 rounded-lg bg-white/90 
-                                 dark:bg-gray-800/90 p-4 shadow-xl backdrop-blur-sm z-10"
+                               dark:bg-gray-800/90 p-4 shadow-xl backdrop-blur-sm z-10"
                       >
                         <p className="text-sm text-gray-700 dark:text-gray-300">
                           {tag.description}
@@ -308,7 +254,7 @@ const AboutClientComponent = () => {
         </motion.div>
       </motion.section>
 
-      {/* Main Content with Updated Layout */}
+      {/* Main Content */}
       <div className="mx-auto max-w-6xl px-6 py-32">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column - Story and Conference */}
@@ -323,12 +269,6 @@ const AboutClientComponent = () => {
               <div className="overflow-hidden rounded-2xl bg-white p-8 shadow-lg 
                            dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 
                            dark:border-gray-700 hover:shadow-2xl transition-all duration-300">
-                {/* Decorative Elements */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 
-                             rounded-full -translate-y-16 translate-x-16 blur-3xl pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-500/10 
-                             rounded-full translate-y-16 -translate-x-16 blur-3xl pointer-events-none" />
-
                 <div className="relative z-10">
                   <div className="flex items-center gap-3 mb-6">
                     <GraduationCap className="h-6 w-6 text-gray-400" />
@@ -358,13 +298,7 @@ const AboutClientComponent = () => {
               <div className="overflow-hidden rounded-2xl bg-white/80 dark:bg-gray-800/80 
                            backdrop-blur-sm border border-gray-200 dark:border-gray-700 
                            p-8 shadow-lg hover:shadow-2xl transition-all duration-300">
-                {/* Decorative elements */}
-                <div className="absolute top-0 left-0 w-32 h-32 bg-blue-500/10 
-                             rounded-full -translate-x-16 -translate-y-16 blur-3xl" />
-                <div className="absolute bottom-0 right-0 w-32 h-32 bg-purple-500/10 
-                             rounded-full translate-x-16 translate-y-16 blur-3xl" />
-
-<div className="relative z-10">
+                <div className="relative z-10">
                   <h2 className="text-3xl font-semibold bg-clip-text text-transparent 
                               bg-gradient-to-r from-gray-900 to-gray-600 
                               dark:from-white dark:to-gray-400 mb-6">
@@ -383,84 +317,10 @@ const AboutClientComponent = () => {
 
           {/* Right Column - Skills and Support */}
           <div className="lg:col-span-4 lg:sticky lg:top-8 lg:self-start space-y-6">
-            {/* Professional Skills Section */}
-            <motion.div 
-              className="lg:col-span-4"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="rounded-2xl bg-white p-6 shadow-lg dark:bg-gray-800/80 
-                         backdrop-blur-sm border border-gray-200 dark:border-gray-700 
-                         hover:shadow-2xl transition-all duration-300">
-                <h3 className="text-xl font-semibold mb-6 text-gray-900 dark:text-white">
-                  Professional Skills
-                </h3>
-                
-                {/* Category Tabs */}
-                <div className="flex flex-wrap gap-2 mb-6 p-1 bg-gray-100 
-                           dark:bg-gray-700/50 rounded-lg">
-                  {(Object.entries(categories) as [CategoryKey, Category][]).map(([key, category]) => (
-                    <motion.button
-                      key={key}
-                      className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm 
-                             font-medium transition-all duration-300 ${
-                        activeSection === key
-                          ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg'
-                          : 'hover:bg-white dark:hover:bg-gray-600'
-                      }`}
-                      onClick={() => setActiveSection(key)}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <category.icon className="h-4 w-4" />
-                      {category.title}
-                    </motion.button>
-                  ))}
-                </div>
+            
+          
 
-                {/* Skills Grid */}
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeSection}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="grid grid-cols-1 gap-3"
-                  >
-                    {categories[activeSection].skills.map((skill, i) => (
-                      <motion.div
-                        key={skill.text}
-                        className="group relative rounded-lg bg-gray-50 p-4 transition-all 
-                               duration-300 hover:bg-gray-100 dark:bg-gray-700/50 dark:hover:bg-gray-600"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.1 }}
-                        whileHover={{ scale: 1.02 }}
-                      >
-                        <div className="flex items-start space-x-3">
-                          <skill.icon className={`${skill.color} h-6 w-6 flex-shrink-0`} />
-                          <div>
-                            <p className="text-sm font-medium text-gray-900 dark:text-white">
-                              {skill.text}
-                            </p>
-                            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 
-                                      opacity-0 transition-opacity duration-300 
-                                      group-hover:opacity-100">
-                              {skill.description}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="absolute inset-0 rounded-lg ring-2 ring-transparent 
-                                    transition-all duration-300 group-hover:ring-blue-500/50" />
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </motion.div>
-
-            {/* Support Section with VenmoCard */}
+            {/* Support Section */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -469,7 +329,7 @@ const AboutClientComponent = () => {
               className="mt-6"
             >
               <VenmoCard 
-                venmoUsername="YourVenmoUsername"
+                venmoUsername="IlyasOAbukar"
                 className="rounded-2xl backdrop-blur-sm hover:shadow-2xl transition-all duration-300"
               />
             </motion.div>

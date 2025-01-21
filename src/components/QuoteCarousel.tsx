@@ -1,6 +1,6 @@
 // src/components/QuoteCarousel.tsx //
-
 'use client';
+
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
@@ -103,7 +103,7 @@ const QuoteCarousel: React.FC = () => {
   };
 
   return (
-    <div className="relative mt-8 h-72 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-gray-100 via-white to-gray-50 p-8 shadow-xl dark:from-gray-800 dark:via-gray-800 dark:to-gray-700">
+    <div className="relative mt-8 h-80 sm:h-72 w-full overflow-hidden rounded-2xl bg-gradient-to-br from-gray-100 via-white to-gray-50 p-4 sm:p-8 shadow-xl dark:from-gray-800 dark:via-gray-800 dark:to-gray-700">
       {/* Decorative elements */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent" />
@@ -129,16 +129,16 @@ const QuoteCarousel: React.FC = () => {
               opacity: { duration: 0.3 },
               scale: { duration: 0.3 }
             }}
-            className="absolute inset-0 flex flex-col items-center justify-center px-6"
+            className="absolute inset-0 flex flex-col items-center justify-center px-2 sm:px-6"
           >
-            <p className="mb-6 text-center text-lg italic leading-relaxed text-gray-800 dark:text-gray-200 lg:text-xl">
+            <p className="mb-4 sm:mb-6 text-center text-base sm:text-lg italic leading-relaxed text-gray-800 dark:text-gray-200 lg:text-xl">
               &ldquo;{quotes[currentIndex].text}&rdquo;
             </p>
             <div className="text-center">
-              <p className="text-sm font-medium text-gray-900 dark:text-gray-100">
+              <p className="text-xs sm:text-sm font-medium text-gray-900 dark:text-gray-100">
                 {quotes[currentIndex].author}
               </p>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 <em>{quotes[currentIndex].source}</em>
               </p>
             </div>
