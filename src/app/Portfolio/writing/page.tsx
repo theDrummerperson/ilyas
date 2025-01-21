@@ -29,9 +29,9 @@ const WritingPage = () => {
 
   return (
     <section className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-16 dark:from-gray-900 dark:to-gray-800">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header Section */}
-        <div className="mx-auto mb-16 max-w-3xl text-center">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        {/* Header Section with reduced width */}
+        <div className="mx-auto mb-16 max-w-2xl text-center">
           <h1 className="relative mb-6 inline-block text-4xl font-bold text-gray-900 dark:text-white md:text-5xl">
             Essays
             <div className="absolute -bottom-2 left-0 h-1 w-full -skew-x-12 transform bg-blue-500" />
@@ -41,15 +41,15 @@ const WritingPage = () => {
           </p>
         </div>
 
-        {/* Featured Essay (if exists) */}
+        {/* Featured Essay with full width within container */}
         {essays.length > 0 && (
           <div className="mb-16">
             <WritingCard {...essays[0]} />
           </div>
         )}
 
-        {/* Grid of Other Essays */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {/* Grid of Other Essays - modified to two columns */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {essays.slice(1).map((essay, index) => (
             <WritingCard key={index} {...essay} />
           ))}

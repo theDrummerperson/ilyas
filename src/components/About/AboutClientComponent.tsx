@@ -60,10 +60,8 @@ const AboutClientComponent = () => {
       author: "UC Santa Barbara Department of Black Studies",
       daysAgo: "Less than a year ago",
       image: "/usclogo.jpeg",
-    },
-    // Add more conferences here
+    }
   ];
-
 
   const skillCategories = [
     {
@@ -100,10 +98,6 @@ const AboutClientComponent = () => {
       ]
     }
   ];
-
-
-
-
 
   if (!mounted) return null;
 
@@ -149,8 +143,7 @@ const AboutClientComponent = () => {
         {/* Hero Content */}
         <div className="relative z-10 flex h-full items-center px-6">
           <motion.div 
-            className="mx-auto max-w-4xl rounded-2xl bg-white/10 p-8 backdrop-blur-md border border-white/10
-                     hover:bg-white/15 transition-all duration-300"
+            className="mx-auto max-w-2xl rounded-2xl bg-white/10 p-8 backdrop-blur-md border border-white/10 hover:bg-white/15 transition-all duration-300"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -197,8 +190,8 @@ const AboutClientComponent = () => {
                 <div key={tag.title} className="relative group">
                   <motion.button
                     className="rounded-full bg-white/20 px-4 py-2 text-sm text-white 
-                           transition-all duration-300 hover:bg-white/30 border border-white/10 
-                           group-hover:ring-2 ring-white/30 flex items-center gap-2"
+                             transition-all duration-300 hover:bg-white/30 border border-white/10 
+                             group-hover:ring-2 ring-white/30 flex items-center gap-2"
                     onMouseEnter={() => setActiveTag(tag.title)}
                     onMouseLeave={() => setActiveTag(null)}
                     whileHover={{ scale: 1.05 }}
@@ -216,7 +209,7 @@ const AboutClientComponent = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
                         className="absolute top-full mt-2 w-64 rounded-lg bg-white/90 
-                               dark:bg-gray-800/90 p-4 shadow-xl backdrop-blur-sm z-10"
+                                 dark:bg-gray-800/90 p-4 shadow-xl backdrop-blur-sm z-10"
                       >
                         <p className="text-sm text-gray-700 dark:text-gray-300">
                           {tag.description}
@@ -255,7 +248,7 @@ const AboutClientComponent = () => {
       </motion.section>
 
       {/* Main Content */}
-      <div className="mx-auto max-w-6xl px-6 py-32">
+      <div className="mx-auto max-w-4xl px-6 py-32">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column - Story and Conference */}
           <div className="lg:col-span-8 space-y-12">
@@ -315,11 +308,8 @@ const AboutClientComponent = () => {
             </motion.div>
           </div>
 
-          {/* Right Column - Skills and Support */}
+          {/* Right Column - Support */}
           <div className="lg:col-span-4 lg:sticky lg:top-8 lg:self-start space-y-6">
-            
-          
-
             {/* Support Section */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
