@@ -23,22 +23,28 @@ const NavBar = () => {
 
   const navLinks: NavLinkType[] = [
     {
+      href: '/about',
       label: 'ABOUT',
+    },
+    {
+      href: '/Portfolio/projects',
+      label: 'PROJECTS',
+    },
+    {
+      href: '/Portfolio/photography',
+      label: 'PHOTOGRAPHY',
+    },
+    {
+      href: '/Portfolio/writing',
+      label: 'WRITING',
+    },
+    {
+      label: 'MORE',
       isDropdown: true,
       subLinks: [
-        { href: '/about', label: 'ABOUT' },
         { href: '/updates', label: 'UPDATES' },
         { href: '/resume', label: 'RESUME' },
         { href: '/contact', label: 'CONTACT' },
-      ],
-    },
-    {
-      label: 'PORTFOLIO',
-      isDropdown: true,
-      subLinks: [
-        { href: '/Portfolio/projects', label: 'PROJECTS' },
-        { href: '/Portfolio/writing', label: 'WRITING' },
-        { href: '/Portfolio/photography', label: 'PHOTOGRAPHY' },
       ],
     },
   ];
@@ -146,7 +152,7 @@ const NavBar = () => {
           isScrolled ? 'bg-white/80 shadow-lg backdrop-blur-md' : 'bg-white'
         }`}
       >
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-4xl px-6">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
             <motion.div
@@ -160,7 +166,7 @@ const NavBar = () => {
             </motion.div>
 
             {/* Desktop Navigation */}
-            <div className="hidden items-center gap-8 md:flex">
+            <div className="hidden items-center gap-6 md:flex">
               {navLinks.map((link) => (
                 <NavLink key={link.label} {...link} />
               ))}
