@@ -60,7 +60,95 @@ const AboutClientComponent = () => {
       author: "UC Santa Barbara Department of Black Studies",
       daysAgo: "Less than a year ago",
       image: "/usclogo.jpeg",
+    },
+
+    {
+      id: 2,
+      title: "For the Betterment of a Dependent People: Somalia and African American Self-Making.",
+      category: "Symposium",
+      date: "November 10, 2018",
+      location: "Bates College (African American and American Cultural Studies)",
+      event: "Blackness: Citizenship, and Emancipatory Struggle",
+      author: "Bkates Africana",
+      daysAgo: "4 years ago",
+      image: "/bates.jpg",
+    },
+    {
+      id: 3,
+      title: "Phillis Wheatley and the Frail Black Body.",
+      category: "Emerging Scholars Workshop",
+      date: "March 31 - April 1, 2017",
+      location: "Pennsylvania State University",
+      event: "Historicizing Blackness: Sports, Performance, and Politics",
+      author: "George and Ann Richards Civil War Era Center",
+      daysAgo: "6 years ago",
+      image: "/psu.jpeg",
+    },
+
+    {
+      id: 4,
+      title: "Toward A Black Refugeeism",
+      category: "Conference Presentation",
+      date: "April 14 - April 15, 2017",
+      location: "Northwestern University, Evanston, Illinois",
+      event: "RE Africa: Archives Knowledges Approaches",
+      author: "Northwestern University Department",
+      daysAgo: "6 years ago",
+      image: "/nu.jpeg",
+    },
+
+
+    {
+      id: 5,
+      title: "The Place of Somalia in Black Geographies",
+      category: "Conference Presentation",
+      date: "October 11-13, 2017",
+      location: "UC Berkeley, Berkeley, California",
+      event: "Black Geographies: Insurgent Knowledge, Spatial Poetics, and the Politics of Blackness",
+      author: "Berkeley Geography Department",
+      daysAgo: "6 years ago",
+      image: "/berk.png",
+    },
+
+    {
+      id: 6,
+      title: "Beyond Ayaan Hiirsi Ali: On Being Black, Muslim, and from East Africa in Liberal North American Societies",
+      category: "Session Organizer & Panelist",
+      date: "October 8-11, 2015",
+      location: "Toronto, Canada",
+      event: "American Studies Association: The (Re)production of Misery and the Ways of Resistance",
+      author: "American Studies Asssociation",
+      daysAgo: "8 years ago",
+      image: "/asa.png",
+    },
+
+    {
+      id: 7,
+      title: "Decolonizing Somali Studies",
+      category: "Roundtable Discussion",
+      date: "May 2, 2015",
+      location: "York University, Canada",
+      event: "Critical Ethnic Studies Association: Sovereignties and Colonialisms: Resisting Racism, Extraction, and Dispossession",
+      author: "Critical Ethnic Studies Association",
+      daysAgo: "8 years ago",
+      image: "/cesa.png",
+    },
+
+
+
+    {
+      id: 8,
+      title: "The Studies in Our Work",
+      category: "Brown Bag Presentation",
+      date: "April 30, 2015",
+      location: "University of Maryland, College Park",
+      event: "American Studies Department Brown Bag",
+      author: "American Studies @UMD",
+      daysAgo: "8 years ago",
+      image: "/UMD.jpeg",
     }
+
+
   ];
 
   if (!mounted) return null;
@@ -144,8 +232,7 @@ const AboutClientComponent = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
             >
-              Artist, developer, and perpetual learner exploring the intersections of art,
-              technology, and identity.
+             I am an educator, researcher, and theorist deeply curious about the intersections of aesthetics, politics, technology, and culture. This space is where I explore representation, mediation, and negation. Intrigued? Stay a while.
             </motion.p>
 
             {/* Interactive Tags */}
@@ -216,33 +303,7 @@ const AboutClientComponent = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column - Story and Conference */}
           <div className="lg:col-span-8 space-y-12">
-            {/* Story Section */}
-            <motion.div 
-              className="relative"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="overflow-hidden rounded-2xl bg-gray-900/80 p-8 shadow-lg 
-                           backdrop-blur-sm border border-gray-700 
-                           hover:shadow-2xl transition-all duration-300">
-                <div className="relative z-10">
-                  <div className="flex items-center gap-3 mb-6">
-                    <GraduationCap className="h-6 w-6 text-gray-400" />
-                    <h2 className="text-3xl font-semibold bg-clip-text text-transparent 
-                                 bg-gradient-to-r from-white to-gray-400">
-                      My Story
-                    </h2>
-                  </div>
-                  <div className="mt-6 space-y-4 text-gray-300">
-                    <p className="leading-relaxed">
-                      I am an educator, researcher, and theorist deeply curious about the intersections of aesthetics, politics, technology, and culture. 
-                      This space is where I explore representation, mediation, and negation. Intrigued? Stay a while.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+           
 
             {/* Conference Section */}
             <motion.div
