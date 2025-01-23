@@ -63,46 +63,10 @@ const AboutClientComponent = () => {
     }
   ];
 
-  const skillCategories = [
-    {
-      title: 'Research & Analysis',
-      skills: [
-        'Race and Immigration Studies',
-        'Digital Media Studies',
-        'Cultural Analysis',
-        'Ethnographic Research',
-        'American Studies',
-        'Media Ecology'
-      ]
-    },
-    {
-      title: 'Teaching & Leadership',
-      skills: [
-        'Curriculum Development',
-        'Multi-campus Teaching',
-        'Research Presentation',
-        'Conference Organization',
-        'Strategic Planning',
-        'Student Engagement'
-      ]
-    },
-    {
-      title: 'Technical & Creative',
-      skills: [
-        'Multimedia Installation',
-        'Digital Content Creation',
-        'Technology-Enhanced Learning',
-        'Media Production',
-        'Database Management',
-        'Contemporary Art Practice'
-      ]
-    }
-  ];
-
   if (!mounted) return null;
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+    <div className="relative min-h-screen bg-gradient-to-b from-black via-black to-black">
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 origin-left z-50"
@@ -208,10 +172,10 @@ const AboutClientComponent = () => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
-                        className="absolute top-full mt-2 w-64 rounded-lg bg-white/90 
-                                 dark:bg-gray-800/90 p-4 shadow-xl backdrop-blur-sm z-10"
+                        className="absolute top-full mt-2 w-64 rounded-lg bg-gray-900/90 
+                                 p-4 shadow-xl backdrop-blur-sm z-10 border border-gray-700"
                       >
-                        <p className="text-sm text-gray-700 dark:text-gray-300">
+                        <p className="text-sm text-gray-300">
                           {tag.description}
                         </p>
                       </motion.div>
@@ -259,21 +223,20 @@ const AboutClientComponent = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <div className="overflow-hidden rounded-2xl bg-white p-8 shadow-lg 
-                           dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 
-                           dark:border-gray-700 hover:shadow-2xl transition-all duration-300">
+              <div className="overflow-hidden rounded-2xl bg-gray-900/80 p-8 shadow-lg 
+                           backdrop-blur-sm border border-gray-700 
+                           hover:shadow-2xl transition-all duration-300">
                 <div className="relative z-10">
                   <div className="flex items-center gap-3 mb-6">
                     <GraduationCap className="h-6 w-6 text-gray-400" />
                     <h2 className="text-3xl font-semibold bg-clip-text text-transparent 
-                                 bg-gradient-to-r from-gray-900 to-gray-600 
-                                 dark:from-white dark:to-gray-400">
+                                 bg-gradient-to-r from-white to-gray-400">
                       My Story
                     </h2>
                   </div>
-                  <div className="mt-6 space-y-4 text-gray-600 dark:text-gray-300">
+                  <div className="mt-6 space-y-4 text-gray-300">
                     <p className="leading-relaxed">
-                      Deeply curious about the intersections of aesthetics, politics, technology, and culture. 
+                      I am an educator, researcher, and theorist deeply curious about the intersections of aesthetics, politics, technology, and culture. 
                       This space is where I explore representation, mediation, and negation. Intrigued? Stay a while.
                     </p>
                   </div>
@@ -288,16 +251,15 @@ const AboutClientComponent = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <div className="overflow-hidden rounded-2xl bg-white/80 dark:bg-gray-800/80 
-                           backdrop-blur-sm border border-gray-200 dark:border-gray-700 
+              <div className="overflow-hidden rounded-2xl bg-gray-900/80 
+                           backdrop-blur-sm border border-gray-700 
                            p-8 shadow-lg hover:shadow-2xl transition-all duration-300">
                 <div className="relative z-10">
                   <h2 className="text-3xl font-semibold bg-clip-text text-transparent 
-                              bg-gradient-to-r from-gray-900 to-gray-600 
-                              dark:from-white dark:to-gray-400 mb-6">
+                              bg-gradient-to-r from-white to-gray-400 mb-6">
                     Conference Presentations
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-400 mb-8">
+                  <p className="text-gray-300 mb-8">
                     Academic presentations and workshops
                   </p>
                   <div className="mt-6">

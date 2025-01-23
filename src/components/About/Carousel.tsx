@@ -1,10 +1,8 @@
-
 "use client";
-
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Calendar, MapPin, ArrowRight } from 'lucide-react';
 
 export interface Conference {
   id: number;
@@ -26,20 +24,24 @@ const Carousel = ({ items }: CarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
+  // Enhanced slide variants with more sophisticated animations
   const slideVariants = {
     enter: (direction: number) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0
+      x: direction > 0 ? '100%' : '-100%',
+      opacity: 0,
+      scale: 0.95
     }),
     center: {
       zIndex: 1,
       x: 0,
-      opacity: 1
+      opacity: 1,
+      scale: 1
     },
     exit: (direction: number) => ({
       zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0
+      x: direction < 0 ? '100%' : '-100%',
+      opacity: 0,
+      scale: 0.95
     })
   };
 
@@ -62,7 +64,7 @@ const Carousel = ({ items }: CarouselProps) => {
 
   return (
     <div className="relative w-full max-w-4xl mx-auto overflow-hidden">
-       <div className="aspect-[4/3] md:aspect-[16/9] relative">
+      <div className="aspect-[16/9] relative">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentIndex}
@@ -73,7 +75,8 @@ const Carousel = ({ items }: CarouselProps) => {
             exit="exit"
             transition={{
               x: { type: "spring", stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 }
+              opacity: { duration: 0.3 },
+              scale: { duration: 0.3 }
             }}
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
@@ -88,99 +91,94 @@ const Carousel = ({ items }: CarouselProps) => {
             }}
             className="absolute inset-0"
           >
-            <div className="h-full bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-lg">
-              <div className="flex flex-col md:flex-row gap-6 h-full">
-                <div className="w-full md:w-1/2 flex items-center justify-center bg-white rounded-lg p-4">
-                  <div className="relative w-full h-auto aspect-square max-w-[256px] min-h-[200px]">
+            <div className="h-full bg-gray-900/90 backdrop-blur-md border border-gray-700/50 rounded-2xl p-8 shadow-2xl">
+              <div className="flex flex-col md:flex-row gap-8 h-full">
+                <div className="w-full md:w-1/2 flex items-center justify-center rounded-xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 p-6">
+                  <motion.div 
+                    className="relative w-full h-auto aspect-square max-w-[256px] min-h-[200px]"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
                     <img
                       src={currentItem.image}
                       alt={currentItem.title}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain filter drop-shadow-lg"
                     />
-                  </div>
+                  </motion.div>
                 </div>
-                <div className="w-full md:w-1/2 flex flex-col justify-center space-y-3 py-2">
-                  <span className="text-sm font-medium text-blue-500">
+                
+                <div className="w-full md:w-1/2 flex flex-col justify-center space-y-4">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium w-fit">
                     {currentItem.category}
                   </span>
-                  <h3 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white line-clamp-2">
+                  
+                  <h3 className="text-2xl font-bold text-white tracking-tight">
                     {currentItem.title}
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
+                  
+                  <p className="text-lg text-gray-300 leading-relaxed">
                     {currentItem.event}
                   </p>
-                  <div className="space-y-1 text-sm text-gray-500 dark:text-gray-400">
-                    <p className="line-clamp-1">{currentItem.location}</p>
-                    <p>{currentItem.date}</p>
+                  
+                  <div className="flex flex-col gap-3 text-gray-400">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4" />
+                      <span className="text-sm">{currentItem.location}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4" />
+                      <span className="text-sm">{currentItem.date}</span>
+                    </div>
                   </div>
+                  
+                  <motion.button 
+                    className="mt-4 flex items-center gap-2 text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors group w-fit"
+                    whileHover={{ x: 5 }}
+                  >
+                    Learn more
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </motion.button>
                 </div>
               </div>
             </div>
-            <div className="flex flex-col md:flex-row gap-6 h-full">
-  <div className="w-full md:w-1/2 flex items-center justify-center bg-white rounded-lg p-4">
-    {/* Replace the fixed size container with a responsive one */}
-    <div className="relative w-full h-auto aspect-square max-w-[256px] min-h-[200px]">
-      <img
-        src={currentItem.image}
-        alt={currentItem.title}
-        className="w-full h-full object-contain"
-      />
-    </div>
-  </div>
-                
-  <div className="w-full md:w-1/2 flex flex-col justify-center space-y-3 py-2">
-    <span className="text-sm font-medium text-blue-500">
-      {currentItem.category}
-    </span>
-    <h3 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white line-clamp-2">
-      {currentItem.title}
-    </h3>
-    <p className="text-sm text-gray-600 dark:text-gray-300 line-clamp-2">
-      {currentItem.event}
-    </p>
-    <div className="space-y-1 text-sm text-gray-500 dark:text-gray-400">
-      <p className="line-clamp-1">{currentItem.location}</p>
-      <p>{currentItem.date}</p>
-    </div>
-  </div>
-</div>
-
-
-
-
-
-
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation Buttons */}
-        <button
+        {/* Enhanced Navigation Buttons */}
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           onClick={() => paginate(-1)}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-gray-900/80 border border-gray-700/50 backdrop-blur-sm shadow-lg hover:bg-gray-800 transition-colors"
         >
-          <ChevronLeft className="w-6 h-6 text-gray-800 dark:text-white" />
-        </button>
-        <button
+          <ChevronLeft className="w-5 h-5 text-white" />
+        </motion.button>
+        
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
           onClick={() => paginate(1)}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white/80 dark:bg-gray-800/80 shadow-lg hover:bg-white dark:hover:bg-gray-800 transition-colors"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 rounded-full bg-gray-900/80 border border-gray-700/50 backdrop-blur-sm shadow-lg hover:bg-gray-800 transition-colors"
         >
-          <ChevronRight className="w-6 h-6 text-gray-800 dark:text-white" />
-        </button>
+          <ChevronRight className="w-5 h-5 text-white" />
+        </motion.button>
 
-        {/* Progress Indicators */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+        {/* Enhanced Progress Indicators */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex gap-2">
           {items.map((_, index) => (
-            <button
+            <motion.button
               key={index}
               onClick={() => {
                 setDirection(index > currentIndex ? 1 : -1);
                 setCurrentIndex(index);
               }}
-              className={`w-2 h-2 rounded-full transition-colors ${
+              className={`w-8 h-1 rounded-full transition-all duration-300 ${
                 index === currentIndex
-                  ? 'bg-blue-500'
-                  : 'bg-gray-300 dark:bg-gray-600'
+                  ? 'bg-blue-500 scale-x-100'
+                  : 'bg-gray-600 scale-x-75 hover:scale-x-100'
               }`}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             />
           ))}
         </div>
@@ -190,10 +188,3 @@ const Carousel = ({ items }: CarouselProps) => {
 };
 
 export default Carousel;
-
-
-
-
-
-
-

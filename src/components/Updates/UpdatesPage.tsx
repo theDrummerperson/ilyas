@@ -14,14 +14,28 @@ interface Update {
 
 const UpdatesPage = () => {
   const updates: Update[] = [
+
     {
       id: 1,
+      title: "Layout Improvements in a Time of Political Turmoil",
+      date: "January 22, 2025",
+      description: "The country is bananas right now with the return of  Orange Face in  office and his fascist cronies causing chaos. But there is good news: I updated the layout of the website by fixing some serious padding and typography errors and restructured the navigation bar. Enjoy! .",
+      image: "/peace.JPG",
+      tag: "NeW Features"
+    },
+
+
+    {
+      id: 2,
       title: "Website Launch",
       date: "January 10, 2025",
       description: "The website is finally up. This project has taken a lot of work but it was worth it. Watch this space for updates about my projects, moves, and random adventures.",
       image: "/bioprofile.jpg",
       tag: "New Feature"
     },
+
+  
+
   ];
 
   const [selectedUpdate, setSelectedUpdate] = useState<Update>(updates[0]);

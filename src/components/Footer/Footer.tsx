@@ -1,6 +1,7 @@
 'use client';
 
 
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Code, Newspaper, Camera, ArrowUpRight, ChevronUp } from 'lucide-react';
@@ -66,23 +67,23 @@ const Footer = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <div
-                className={`space-y-4 rounded-lg p-4 transition-colors duration-300 ${
+                className={`space-y-4 rounded-lg p-4 transition-colors duration-300 mx-auto w-48 ${
                   hoveredSection === 'portfolio' ? 'bg-gray-800/50' : ''
                 }`}
                 onMouseEnter={() => setHoveredSection('portfolio')}
                 onMouseLeave={() => setHoveredSection(null)}
               >
-                <h3 className="text-sm font-medium tracking-wider text-white text-center">PORTFOLIO</h3>
-                <div className="space-y-3 flex flex-col items-center">
+                <h3 className="text-sm font-medium tracking-wider text-white text-left px-12">PORTFOLIO</h3>
+                <div className="space-y-3 flex flex-col items-start px-12">
                   {portfolioLinks.map((link) => (
                     <Link
                       key={link.label}
                       href={link.href}
-                      className="group flex items-center justify-center space-x-2 text-sm font-medium text-gray-400 transition-colors duration-200 hover:text-white w-full"
+                      className="group flex items-start text-left space-x-2 text-sm font-medium text-gray-400 transition-colors duration-200 hover:text-white w-full"
                     >
-                      <link.icon className="h-4 w-4" />
-                      <span>{link.label}</span>
-                      <ArrowUpRight className="h-3 w-3 -translate-x-2 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
+                      <link.icon className="h-4 w-4 flex-shrink-0" />
+                      <span className="flex-1">{link.label}</span>
+                      <ArrowUpRight className="h-3 w-3 -translate-x-2 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 flex-shrink-0" />
                     </Link>
                   ))}
                 </div>
@@ -98,19 +99,19 @@ const Footer = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <div
-                className={`space-y-4 rounded-lg p-4 transition-colors duration-300 ${
+                className={`space-y-4 rounded-lg p-4 transition-colors duration-300 ml-auto w-48 ${
                   hoveredSection === 'connect' ? 'bg-gray-800/50' : ''
                 }`}
                 onMouseEnter={() => setHoveredSection('connect')}
                 onMouseLeave={() => setHoveredSection(null)}
               >
-                <h3 className="text-sm font-medium tracking-wider text-white text-right">CONNECT</h3>
-                <div className="space-y-3 flex flex-col items-end">
+                <h3 className="text-sm font-medium tracking-wider text-white text-left pl-16">CONNECT</h3>
+                <div className="space-y-3 flex flex-col pl-16">
                   {connectLinks.map((link) => (
                     <Link
                       key={link.label}
                       href={link.href}
-                      className="group flex items-center justify-end space-x-2 text-sm font-medium text-gray-400 transition-colors duration-200 hover:text-white w-full"
+                      className="group flex items-center space-x-2 text-sm font-medium text-gray-400 transition-colors duration-200 hover:text-white"
                     >
                       <span>{link.label}</span>
                       <ArrowUpRight className="h-3 w-3 -translate-x-2 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100" />
