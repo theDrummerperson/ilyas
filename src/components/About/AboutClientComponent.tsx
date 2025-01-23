@@ -1,17 +1,17 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import {
-  Camera, 
-  Library, 
-  Globe, 
+  Camera,
+  Library,
+  Globe,
   ChevronDown,
-  GraduationCap, 
-  Award
+  GraduationCap,
+  Award,
 } from 'lucide-react';
-import type { Conference } from './Carousel';
-import Carousel from './Carousel';
+import Carousel from './Carousel'; // Import Carousel component
 import VenmoCard from '@/components/VenmoCard';
 import SkillsSection from '@/components/resume/SkillsSection';
 
@@ -19,6 +19,19 @@ interface Tag {
   title: string;
   description: string;
   icon: React.ForwardRefExoticComponent<any>;
+}
+
+interface Conference {
+  id: number;
+  title: string;
+  category: string;
+  date: string;
+  location: string;
+  event: string;
+  author: string;
+  daysAgo: string;
+  image: string;
+  length: number; // Added the missing property 'length'
 }
 
 const AboutClientComponent = () => {
@@ -35,18 +48,18 @@ const AboutClientComponent = () => {
     {
       title: 'Culture, Media, Technology',
       description: 'Exploring intersections of race, media representation, and technological impact',
-      icon: Camera
+      icon: Camera,
     },
     {
       title: 'Epistemologies of Vision',
       description: 'Understanding how visual perception shapes knowledge and understanding',
-      icon: Globe
+      icon: Globe,
     },
     {
       title: 'Language and Systems of Knowledge',
       description: 'Analyzing how language structures our understanding of reality',
-      icon: Library
-    }
+      icon: Library,
+    },
   ];
 
   const conferences: Conference[] = [
@@ -60,6 +73,7 @@ const AboutClientComponent = () => {
       author: "UC Santa Barbara Department of Black Studies",
       daysAgo: "Less than a year ago",
       image: "/usclogo.jpeg",
+      length: 0
     },
 
     {
@@ -69,9 +83,10 @@ const AboutClientComponent = () => {
       date: "November 10, 2018",
       location: "Bates College (African American and American Cultural Studies)",
       event: "Blackness: Citizenship, and Emancipatory Struggle",
-      author: "Bkates Africana",
+      author: "Bates Africana",
       daysAgo: "4 years ago",
       image: "/bates.jpg",
+      length: 0
     },
     {
       id: 3,
@@ -83,6 +98,7 @@ const AboutClientComponent = () => {
       author: "George and Ann Richards Civil War Era Center",
       daysAgo: "6 years ago",
       image: "/psu.jpeg",
+      length: 0
     },
 
     {
@@ -95,6 +111,7 @@ const AboutClientComponent = () => {
       author: "Northwestern University Department",
       daysAgo: "6 years ago",
       image: "/nu.jpeg",
+      length: 0
     },
 
 
@@ -108,6 +125,7 @@ const AboutClientComponent = () => {
       author: "Berkeley Geography Department",
       daysAgo: "6 years ago",
       image: "/berk.png",
+      length: 0
     },
 
     {
@@ -120,6 +138,7 @@ const AboutClientComponent = () => {
       author: "American Studies Asssociation",
       daysAgo: "8 years ago",
       image: "/asa.png",
+      length: 0
     },
 
     {
@@ -132,6 +151,7 @@ const AboutClientComponent = () => {
       author: "Critical Ethnic Studies Association",
       daysAgo: "8 years ago",
       image: "/cesa.png",
+      length: 0
     },
 
 
@@ -146,6 +166,7 @@ const AboutClientComponent = () => {
       author: "American Studies @UMD",
       daysAgo: "8 years ago",
       image: "/UMD.jpeg",
+      length: 0
     }
 
 
