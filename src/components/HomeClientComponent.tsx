@@ -1,11 +1,14 @@
 'use client';
 
-
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import QuoteCarousel from '@/components/QuoteCarousel';
+import UpdatesSection from '@/components/Updates/UpdatesSection';
+import AboutMe from '@/components/About/AboutMe';
+import VenmoCard from '@/components/VenmoCard';
+
 
 export default function HomeClientComponent() {
   const [isMobile, setIsMobile] = useState(false);
@@ -23,7 +26,7 @@ export default function HomeClientComponent() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 md:py-20 lg:px-8">
-        {/* Mobile Hero Image */}
+        {/* Mobile Hero Section */}
         {isMobile && (
           <motion.div
             className="relative mb-8 h-80 w-full overflow-hidden rounded-xl"
@@ -95,7 +98,10 @@ export default function HomeClientComponent() {
                 Based in Erie, PA
               </p>
 
-              <QuoteCarousel />
+              {/* AboutMe Component */}
+              <div className="py-4">
+                <AboutMe />
+              </div>
 
               <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
                 <motion.a
@@ -117,7 +123,7 @@ export default function HomeClientComponent() {
             </motion.div>
           </motion.div>
 
-          {/* Desktop Image Content */}
+          {/* Desktop Hero Image */}
           {!isMobile && (
             <motion.div
               className="relative aspect-square w-full max-w-md flex-1"
@@ -147,10 +153,57 @@ export default function HomeClientComponent() {
             </motion.div>
           )}
         </div>
+
+        {/* Updates Section */}
+        <UpdatesSection />
+
+
+{/* Support Section with VenmoCard */}
+<motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mt-24"
+        >
+          <div className="mb-8 text-center">
+            <motion.h2 
+              className="text-2xl font-bold text-gray-900 dark:text-white"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              Support My <span className="text-red-500">Work</span>
+            </motion.h2>
+            <motion.p 
+              className="mt-2 text-gray-600 dark:text-gray-300"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              Help fuel my creative journey ✨
+            </motion.p>
+          </div>
+
+          {/* VenmoCard with max-width for better visual balance */}
+          <div className="mx-auto max-w-2xl">
+            <VenmoCard 
+              venmoUsername="your-venmo-username"
+              className="transform transition-all hover:scale-[1.02] hover:shadow-2xl"
+            />
+          </div>
+        </motion.div>
+
+
+
+
+        {/* QuoteCarousel moved to bottom */}
+        <div className="mt-24">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            Fuel for <span className="text-red-500">Thought!</span>
+          </h2>
+          <QuoteCarousel />
+        </div>
       </div>
     </div>
   );
 }
-
-
-

@@ -19,7 +19,6 @@ const Footer = () => {
   ];
 
   const connectLinks = [
-    { href: '/about', label: 'ABOUT' },
     { href: '/contact', label: 'CONTACT' },
   ];
 
