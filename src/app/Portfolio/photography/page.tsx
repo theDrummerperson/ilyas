@@ -26,14 +26,24 @@ const photos: PhotoData[] = [
     category: 'Faces',
   },
   {
+    src: '/binto.jpg',
+    alt: 'Gambian woman in Bosotn',
+    location: 'Boston/Cambridge, MA',
+    dateTaken: '2017',
+    camera: 'Sony A7',
+    story: 'a quiet afternoon.',
+    category: 'Faces',
+  },
+  {
     src: '/protest.jpg',
-    alt: 'Protest in Bosotn, MA',
+    alt: 'Protest in Boston',
     location: 'Boston/Cambridge, MA',
     dateTaken: '2017',
     camera: 'Sony A7',
     story: 'Queer and Trans protest against Trump.',
     category: 'Places',
   },
+
   {
     src: '/syn.jpeg',
     alt: 'Synthia Issah Portrait',

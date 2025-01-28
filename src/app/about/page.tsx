@@ -3,7 +3,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import { sharedMetadata, sharedViewport } from '@/config/metadata';
-import AboutClientComponent from '@/components/About/AboutClientComponent';
+import AboutClientComponent from '@/components/About/page';
 
 export const metadata: Metadata = {
   ...sharedMetadata,

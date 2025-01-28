@@ -16,7 +16,7 @@ const LinkItem: React.FC<LinkItemProps> = ({ href, label, isActive = false }) =>
   return (
     <Link
       href={href}
-      className="group relative flex items-center"
+      className="group relative flex items-center font-sans"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -54,7 +54,7 @@ const DropdownTrigger: React.FC<DropdownTriggerProps> = ({
 
   return (
     <div 
-      className="relative"
+      className="relative font-sans"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -102,7 +102,7 @@ const DropdownTrigger: React.FC<DropdownTriggerProps> = ({
                 <Link
                   href={subLink.href}
                   className="group block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 
-                  transition-all duration-200 hover:bg-gray-50 dark:hover:bg-gray-800"
+                  font-sans transition-all duration-200 hover:bg-gray-50 dark:hover:bg-gray-800"
                   role="menuitem"
                 >
                   <span className="relative">

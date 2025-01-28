@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2015", // Or "es2020" for even newer features
+    "downlevelIteration": true, // Optional: Enables support for modern iteration
     "types": [
       "@types/react",
       "@types/react-dom",

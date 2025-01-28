@@ -43,15 +43,6 @@ const AboutMe: React.FC = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.2 }}
-        className="flex items-center gap-3 mb-4"
-      >
-        <Award className="h-6 w-6 text-red-500" />
-        <span className="text-gray-600 dark:text-gray-300 font-medium">Scholar & Researcher</span>
-      </motion.div>
 
       <motion.p 
         className="mt-4 text-lg leading-relaxed text-gray-700 dark:text-gray-200"
@@ -59,7 +50,7 @@ const AboutMe: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
       >
-        I am an educator, researcher, and theorist deeply curious about the intersections of aesthetics, politics, technology, and culture. This space is where I explore representation, mediation, and negation.
+        I am drawn to philosophy because I love hating on bad ideas and yearning for the end of this iteration and iterations of the world. I also enjoy thinking through the problems of aesthetics, ethics, politics, technology, and culture. This space is where I explore representation, mediation, and negation.
       </motion.p>
 
       <motion.div 
