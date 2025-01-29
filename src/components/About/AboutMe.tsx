@@ -50,7 +50,7 @@ const AboutMe: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
       >
-        I am drawn to philosophy because I love hating on bad ideas and yearning for the end of this iteration and iterations of the world. I also enjoy thinking through the problems of aesthetics, ethics, politics, technology, and culture. This space is where I explore representation, mediation, and negation.
+        I am drawn to philosophy because I love hating on bad ideas and yearning for the end of this iteration and any other iterations of the world. I also enjoy thinking through the problems of aesthetics, ethics, politics, technology, and culture. This space is where I explore representation, mediation, and negation.
       </motion.p>
 
       <motion.div 
