@@ -2,9 +2,10 @@ import type { Config } from 'tailwindcss';
 import { fontFamily } from 'tailwindcss/defaultTheme';
 import animate from 'tailwindcss-animate';
 import plugin from 'tailwindcss/plugin';
+import forms from '@tailwindcss/typography';
 
 const config: Config = {
-  darkMode: ['class'],
+  darkMode: ['class'], // Enables dark mode with class strategy
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -22,7 +23,7 @@ const config: Config = {
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
-        border: 'hsl(var(--border))',
+        border: 'var(--color-border)',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         primary: {
@@ -54,7 +55,6 @@ const config: Config = {
           foreground: 'hsl(var(--card-foreground))',
         },
       },
-      // Rest of your existing extend configuration...
       backdropBlur: {
         xs: '2px',
         sm: '4px',
@@ -71,15 +71,16 @@ const config: Config = {
         '5xl': '64px',
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        lg: '0.5rem',
+        md: '0.4rem',
+        sm: '0.3rem',
       },
-      // ... rest of your existing configuration
     },
   },
   plugins: [
     require('@tailwindcss/typography'),
+  require('@tailwindcss/forms'),
+  require('tailwindcss-animate'),
     animate,
     plugin(({ addVariant }) => {
       addVariant('child', '& > *');

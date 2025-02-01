@@ -4,7 +4,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import AboutMe from "@/components/About/AboutMe";
-import Footer from "@/components/Footer/Footer";
 import NavBar from "@/components/NavBar/NavBar";
 import { ArrowRight } from "lucide-react";
 

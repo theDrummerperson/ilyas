@@ -1,22 +1,27 @@
 'use client';
 
-
-import React, { useState } from 'react';
-import { Bell } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
+import Image from 'next/image';
 import NavBar from '@/components/NavBar/NavBar';
 import Footer from '@/components/Footer/Footer';
-import ActivitySidebar from '@/components/Instagram/InstagramFeed';
+import config from '@/components/utils/siteConfig'; // Ensure correct path
 
 export default function RootLayoutClientComponent({ children }: { children: React.ReactNode }) {
-  const [isActivityOpen, setIsActivityOpen] = useState<boolean>(false);
+  
 
-  return (
-    <>
-      <NavBar />
-      <main id="main-content" className="min-h-screen flex-grow">
-        {children}
-      </main>
-      <Footer />
-    </>
-  );
+    return (
+      <>
+        {/* Navigation Bar */}
+        <NavBar />
+  
+        {/* Main Content */}
+        <main id="main-content" className="flex-grow container mx-auto p-4">
+          {children}
+        </main>
+  
+        {/* Footer */}
+        <Footer />
+      </>
+    );
 }
