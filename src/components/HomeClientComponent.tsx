@@ -4,11 +4,14 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, Pause, Play, Instagram, ArrowUpRight } from "lucide-react";
+import { useMediaQuery } from "react-responsive";
 
 const HomeClientComponent = () => {
   // Hero Banner State
   const [isPaused, setIsPaused] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   // Content definition
   const heroContent = {
@@ -36,6 +39,14 @@ const HomeClientComponent = () => {
       link: "/Portfolio/photography",
     },
   ];
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length);
+  };
 
   return (
     <>
@@ -115,32 +126,36 @@ const HomeClientComponent = () => {
           </div>
         </div>
 
-        {/* Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Link href={project.link} className="group block">
-                <div className="relative overflow-hidden rounded-lg aspect-square bg-gray-100">
-                  <img
-                    src={project.image}
-                    alt={project.heading}
-                    className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <p className="mt-2 text-center text-lg font-semibold text-gray-900">{project.heading}</p>
+        {/* Project Carousel for Mobile View */}
+        {isMobile ? (
+          <div className="relative flex items-center justify-center">
+            <button onClick={prevSlide} className="absolute left-0 p-2 z-10 bg-gray-200 rounded-full">
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <div className="w-full overflow-hidden">
+              <Link href={projects[currentIndex].link} className="block">
+                <img src={projects[currentIndex].image} alt={projects[currentIndex].heading} className="rounded-lg w-full" />
+                <p className="text-center text-lg font-semibold mt-2">{projects[currentIndex].heading}</p>
               </Link>
-            </motion.div>
-          ))}
-        </div>
+            </div>
+            <button onClick={nextSlide} className="absolute right-0 p-2 z-10 bg-gray-200 rounded-full">
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-6">
+            {projects.map((project, index) => (
+              <Link key={index} href={project.link} className="block">
+                <img src={project.image} alt={project.heading} className="rounded-lg w-full" />
+                <p className="text-center text-lg font-semibold mt-2">{project.heading}</p>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
     </>
   );
 };
 
 export default HomeClientComponent;
+
