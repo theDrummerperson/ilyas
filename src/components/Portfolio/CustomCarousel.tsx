@@ -16,6 +16,14 @@ interface Project {
 
 const projects: Project[] = [
   {
+    id: 'tinystage',
+    title: 'TinyStage @ FEED.ART',
+    description: 'A platform that promotes diversity in the Arts by curating programs by local performers from diverse backgrounds.',
+    image: '/Main_Logo.jpg',
+    year: '2025',
+    location: 'FEED.Art',
+  },
+  {
     id: 'feed-residency',
     title: 'Residency @ FEED Media Arts',
     description: 'Artist residency program exploring digital media and contemporary art practices.',
