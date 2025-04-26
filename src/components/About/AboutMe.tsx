@@ -49,8 +49,13 @@ const AboutMe: React.FC = () => {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-      >
-        I am drawn to philosophy because I love hating on bad ideas and yearning for the end of this iteration and any other iterations of the world. I also enjoy thinking through the problems of aesthetics, ethics, politics, technology, and culture. This space is where I explore representation, mediation, and negation.
+      > I am a photographer, philosopher, and aspiring coder. (In fact, I built this very website!) I also have an interest in graphic design. I'm the founder of TinyStage, a platform dedicated to diversifying the arts by celebrating local and emerging performers.
+
+      Beyond the creative world, I'm currently writing a research study on the politics of refugee resettlement in the United States. Whether I'm coding, photographing, reading, or simply wandering about, I'm always searching for new ways to connect ideas, people, and communities.
+      
+      I live in Erie, Pennsylvania, where I work, create, and explore daily.
+      
+      
       </motion.p>
 
       <motion.div 

@@ -19,7 +19,7 @@ const projects: Project[] = [
     id: 'tinystage',
     title: 'TinyStage @ FEED.ART',
     description: 'A platform that promotes diversity in the Arts by curating programs by local performers from diverse backgrounds.',
-    image: '/Main_Logo.jpg',
+    image: '/Main_Logo.png',
     year: '2025',
     location: 'FEED.Art',
   },

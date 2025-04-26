@@ -1,0 +1,18 @@
+// src/types/blog.ts
+type BlogPostType = {
+  slug: string;
+  title: string;
+  date: string;
+  image?: string;
+  video?: string;
+  excerpt: string;
+  content: string;
+  readingTime?: string;
+  author?: {
+    name: string;
+    avatar: string;
+  };
+  categories: string[];
+  tags: string[];
+  relatedPosts?: string[];
+};

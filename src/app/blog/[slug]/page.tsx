@@ -1,23 +1,20 @@
-'use client';
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import { blogPosts } from '@/data/blogPosts';
 
-import React from 'react';
-import { useSearchParams } from 'next/navigation';
-
-const BlogPostPage = () => {
-  const searchParams = useSearchParams();
-  const slug = searchParams ? searchParams.get('slug') : null;
-
-  if (!slug) {
-    return <div>Loading...</div>; // or handle the case where slug is not available
-  }
+const BlogPost = ({ params }: { params: { slug: string } }) => {
+  const post = blogPosts.find((p) => p.slug === params.slug);
+  if (!post) return notFound();
 
   return (
-    <div>
-      <h1>Blog Post: {slug}</h1>
-      <p>Content for the blog post with slug: {slug}</p>
-      {/* You can fetch and display the blog post content here */}
-    </div>
+    <section className="max-w-4xl mx-auto px-6 py-12">
+      <h1 className="text-4xl font-bold text-gray-900 mb-4">{post.title}</h1>
+      <p className="text-gray-600 mb-6">{post.date}</p>
+      {post.image && <Image src={post.image} alt={post.title} width={800} height={400} className="w-full rounded-lg" />}
+      {post.video && <video className="w-full mt-4 rounded-lg" controls src={post.video} />}
+      <p className="text-lg text-gray-700 mt-6">{post.content}</p>
+    </section>
   );
 };
 
-export default BlogPostPage;
+export default BlogPost;
