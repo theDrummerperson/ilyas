@@ -39,7 +39,7 @@ const Footer = () => {
             <span className="text-red-500">a.</span>
             <span className="text-white">Ilyas Abukar</span>
           </Link>
-          <p className="text-md font-medium text-gray-400">Researcher, Theorist, & Artist</p>
+          <p className="text-md font-medium text-gray-400">Strategist, Community Partner, & Artist</p>
           <div className="flex space-x-4"><SocialLinks /></div>
         </motion.div>
 
